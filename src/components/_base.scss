@@ -1,0 +1,26 @@
+$font-dancing: 'dancing';
+$grey:red;
+//$progress-circular-underlay-stroke:	rgba(map-get($grey, 'base'), 0.4) !default;
+$progress-circular-overlay-transitio:all 0.1s ease-in-out !default;
+
+* {
+    //background-color: #111d19;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+@font-face {
+    font-family: 'dancing';
+    src: url(D:\vue\fllipdish\src\assets\static\DancingScript-Regular.ttf),
+        url(D:\vue\fllipdish\src\assets\static\DancingScript-Medium.ttf),
+        url(D:\vue\fllipdish\src\assets\static\DancingScript-Bold.ttf),
+        url(D:\vue\fllipdish\src\assets\static\DancingScript-SemiBold.ttf);
+}
+@mixin displayflex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
