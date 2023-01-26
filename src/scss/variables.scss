@@ -1,3 +1,10 @@
-$progress-circular-underlay-stroke:rgba(rgb(6, 251, 88), 0.0) !default;
+$progress-circular-underlay-stroke: rgba(rgb(6, 251, 88), 0.0) !default;
 //$progress-circular-underlay-stroke:	rgba(map-get($grey, 'base'), 0.4) !default;
-$progress-circular-overlay-transitio:all 0.5s ease-in-out !default;
+$progress-circular-overlay-transitio: all 0.5s ease-in-out !default;
+/////////////for carousel control in tipPart
+$carousel-controls-size	: 50px !default;
+$carousel-dot-margin: 0 8px !default;
+$carousel-dot-inactive-opacity: .5 !default;
+$carousel-dot-active-opacity: 1 !default;
+$carousel-dot-hover-opacity	: .8 !default;
+/////////////for carousel control in tipPart

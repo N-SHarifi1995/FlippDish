@@ -71,12 +71,12 @@ export default {
     @include displayflex;
     font-size: 3vw;
     color: white;
- padding: 4rem 0;
+    padding: 4rem 0;
 }
 
 .col {
-    @include displayflex;
-    //background-color: rgb(144, 9, 9);
+    @include displayflex;padding-bottom: 8rem;
+   
 }
 
 .menu {
@@ -86,18 +86,19 @@ export default {
     height: 15rem;
     width: 75%;
     position: relative;
-   
 
+    &:hover {
+        transform: translateY(-15%);
+        background: linear-gradient(rgba(29, 27, 27, 0.841), rgba(70, 69, 69, 0.852), rgba(113, 107, 107, 0.611), rgba(255, 252, 252, 0.304));
+        transition: all 0.8s ease-in-out;
+    }
 
     .imgcontainer {
         position: absolute;
         top: -3rem;
-
-
         .img {
             height: 100%;
             width: 100%;
-
         }
     }
 

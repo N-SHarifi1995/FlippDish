@@ -2,12 +2,14 @@
   <div id="app">
     <NavBar></NavBar>
     <router-view></router-view>
+    <FooterPage></FooterPage>
   </div>
 </template>
 <script>
 import NavBar from './components/NavBar.vue';
+import FooterPage from './components/FooterPage.vue';
 export default {
-  components: { NavBar }
+  components: { NavBar, FooterPage}
 }
 </script>
 <style lang="scss" scoped>
