@@ -1,53 +1,48 @@
 <template>
-    
-    <v-card :loading="loading" class="  mx-auto my-12 foodCart" max-width="374">
-                    <template slot="progress">
-                        <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
-                    </template>
+    <v-hover v-slot="{ hover }" open-delay="200">
+        <div class="  mx-auto my-12 foodCart" max-width="374">
 
-                    <v-img class='img' src="@/assets/img/steak.png"></v-img>
 
-                    <v-card-title>Cafe Badilico</v-card-title>
+            <v-img class='img' src="@/assets/img/steak.png"></v-img>
 
-                    <v-card-text>
-                        <v-row align="center" class="mx-0">
-                            <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+            <v-card-title class="title">{{ food.name }}</v-card-title>
 
-                            <div class="grey--text ms-4">
-                                4.5 (413)
-                            </div>
-                        </v-row>
+            <v-card-text>
+                <v-row align="center" class="mx-0">
+                    <v-rating :value="4.5" color="#ffffffc7" dense half-increments readonly size="14"></v-rating>
 
-                        <div class="my-4 text-subtitle-1">
-                            $ • Italian, Cafe
-                        </div>
+                    <div class="grey--text ms-4" color="#ffffffc7">
+                        4.5 (413)
+                    </div>
+                </v-row>
 
-                        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio
-                            seating.</div>
-                    </v-card-text>
 
-                    <v-divider class="mx-4"></v-divider>
+                <!-- <p class="d-hidden explain "  :class="{ 'onhover': hover }">{{ food.explain }}</p> -->
+                <v-fade-transition>
+               
+                    <div v-if="hover">
+                        <p class="explain ">{{ food.explain }}</p>
+                    </div>
+               </v-fade-transition>
 
-                    <v-card-title>Tonight's availability</v-card-title>
+                <div class="my-4 text-subtitle-1">
+                    $ • {{ food.price }}
+                </div>
+            </v-card-text>
 
-                    <v-card-text>
-                        <v-chip-group v-model="selection" active-class="deep-purple accent-4 white--text" column>
-                            <v-chip>5:30PM</v-chip>
+            <v-divider class="mx-4"></v-divider>
 
-                            <v-chip>7:30PM</v-chip>
 
-                            <v-chip>8:00PM</v-chip>
 
-                            <v-chip>9:00PM</v-chip>
-                        </v-chip-group>
-                    </v-card-text>
 
-                    <v-card-actions>
-                        <v-btn color="deep-purple lighten-2" text @click="reserve">
-                            Reserve
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+
+            <v-card-actions>
+                <v-btn color="deep-purple lighten-2" text>
+                    Reserve
+                </v-btn>
+            </v-card-actions>
+        </div>
+    </v-hover>
 </template>
 
 <script>
@@ -57,16 +52,9 @@ export default {
     data() {
         return {
 
-            slides: [
-                { header: 'First', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'second', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'third', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'forth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'fifth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
 
-            ],
         }
-    },
+    }, props: ['food'],
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`)
@@ -76,15 +64,51 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
- .foodCart {
-        @include displayflex;
-        background-color: transparent;
-        flex-direction: column;
-      
+.foodCart {
+    @include displayflex;
+    background-color: transparent;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
+    height: 100%;
+    margin: 0 2rem;
+    padding: 1rem;
+    box-shadow: -7px 10px 26px -3px rgba(191, 191, 189, 0.56);
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 30%;
 
-        .img {
-            max-height: 12rem;
-            max-width: 12rem;
-        }
+    .img {
+        max-height: 12rem;
+        max-width: 12rem;
+        height: 12vw;
+        width: 12vw;
+
     }
+
+    .title {
+        font-size: calc(1.2rem + 0.5vw);
+        padding: 0.5rem 0;
+    }
+
+    .explain {
+        //display: none;
+        //transform: translateY(-200%);
+        // opacity:0;
+        text-align: left;
+        text-justify: auto;
+        padding: 0.5rem 0;
+        font-size: calc(0.5rem + 0.5vw);
+        max-width: min-content;
+        transition: all 1s ease-in-out;
+
+
+    }
+
+    .onhover {
+        // transition:all 1s ;
+        // transform: translateY(+10%);
+        //box-shadow: -7px 10px 26px -3px rgba(191, 191, 189, 0.56);
+        display: flex;
+        opacity: 1;
+    }
+}
 </style>

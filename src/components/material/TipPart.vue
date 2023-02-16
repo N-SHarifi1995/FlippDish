@@ -1,26 +1,26 @@
 <template>
-    <v-card class="tip ">
+    <v-card class="tip">
 
         <!-- <v-row class="title">Meus</v-row> -->
 
-        <v-row no-gutters>
-            <v-carousel cycle class="trans" hide-delimiter-background>
+       
+            <v-carousel cycle class="trans" hide-delimiter-background height="300" :show-arrows="false">
                 <v-carousel-item transition="slide-x-transition" v-for="(slide, i) in slides" :key="i">
-                    <v-card class="tip">
-                        <v-row class="">
-                            <v-col class="text">
-                                <h3>{{ slide.header }}</h3>
-                                <p>{{ slide.explain }}</p>
-                            </v-col>
-                            <v-col class="imgcontainer">
-                                <v-img class='img' :src="getsrc(slide.src)"></v-img>
-                            </v-col>
-                        </v-row>
-                    </v-card>
+
+                    <v-row  no-gutters class="roww">
+                        <v-col   class="col-md-6  col-sm-8  text">
+                            <h3 class="text-h3-sm text-h2-xs text-h3-sm">{{ slide.header }}</h3>
+                            <p>{{ slide.explain }}</p>
+                        </v-col>
+                        <v-col   class="col-md-6  col-sm-4  imgcontainer">
+                            <v-img class='img' :src="getsrc(slide.src)"></v-img>
+                        </v-col>
+                    </v-row>
+
                 </v-carousel-item>
             </v-carousel>
 
-        </v-row>
+      
     </v-card>
 </template>
 
@@ -33,10 +33,10 @@ export default {
 
             slides: [
                 { header: 'First', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'second', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'third', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'forth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'fifth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
+                { header: 'second', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'nn.jpg' },
+                { header: 'third', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'ss.jpg' },
+                { header: 'forth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'jj.jpg' },
+                { header: 'fifth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'kk.jpg' },
 
             ],
         }
@@ -53,43 +53,53 @@ export default {
 .tip {
     padding: 1rem;
     background-color: transparent;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   
 
     .trans {
         transition: all .9s ease-in-out;
+    
+    }
+
+    .roww {
+        height: 100%
     }
 
     .imgcontainer {
-        margin-bottom: 5rem;
+        // margin-bottom: 5rem;
+        //background-color: red;
+        height: 100%;
 
         .img {
             border-radius: 50%;
-            border:8px rgba(17, 16, 16, 0.39) groove;
-       
-          
+            height: 100%;
+            width: 100%;
+            border: 8px rgba(17, 16, 16, 0.39) groove;
+
+
         }
     }
 
     .text {
-        @include displayflex;
-        flex-direction: column;
-        justify-content: right;
-        align-items: flex-start;
+        // display: flex;
+        // flex-direction: column;
         padding: 0 3rem;
         color: white;
         text-align: start;
+        //background-color: blue;
+        height: 100%;
 
         h3 {
-            font-size: 3rem;
-            padding: 3rem 0;
+           font-size:calc(1.5rem + 0.5vw);;
+            padding: 2rem 0;
         }
 
         p {
-            font-size: 1.5rem;
+            font-size:calc(0.8rem + 0.5vw);
 
         }
 
-    }
+    };
 
 }
 </style>

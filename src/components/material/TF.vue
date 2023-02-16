@@ -1,30 +1,25 @@
 <template>
-<div>
-   
-
-    <v-row no-gutters class="title">popular Food</v-row>
-    <swiper
-      :slides-per-view="4"
-      :space-between="30"
-      loop
-      :autoplay ="true"
-      :navigation="true"
-     
-    >
-    <!-- v-for="food in foods" :key="food.id"  @swiper="onSwiper"
-      @slideChange="onSlideChange"-->
-      <swiper-slide
-      v-for="food in foods" :key="food.id"
-        class="test items"
-        :class="{test_2: true}"
-      >
-      <FoodCart :food="food" >
+    <v-card class="TopFood ">
+        <v-row no-gutters class="title">popular Food</v-row>
+        <v-carousel v-model="model" :show-arrows="false" cycle class="trans" hide-delimiter-background>
+            <!--  -->
+            <v-carousel-item v-for="i in 4" :key="i" class="items">
+                <v-row no-gutters >
+                    <v-col class=" container ">
+                        <FoodCart :food="food" v-for="food in foods.filter(j => j.menuId == i)" :key="food.id">
                         </FoodCart>
-                        
-      </swiper-slide>
-    </swiper>
-    
-  </div>
+                    </v-col>
+
+                </v-row>
+              
+            </v-carousel-item>
+
+
+
+        </v-carousel>
+
+
+    </v-card>
 
     <!-- -->
 
@@ -32,19 +27,9 @@
 
 <script>
 
-import { Navigation, Pagination, Autoplay} from 'swiper'
-
-import { SwiperCore, Swiper, SwiperSlide  } from 'swiper-vue2'
-      
-
-// Import Swiper styles
-import 'swiper/swiper-bundle.css'
-
-SwiperCore.use([Navigation, Pagination,Autoplay])
-
- import FoodCart from './submaterial/FoodCart.vue';
+import FoodCart from './submaterial/FoodCart.vue';
 export default {
-    name: "TTopFood",
+    name: "TopFood",
     data() {
         return {
             foods: [
@@ -71,52 +56,36 @@ export default {
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`);
-        },
-        getImageUrl(imageId) {
-            return `https://picsum.photos/600/400/?image=${imageId}`
-        },
-        // onSwiper(swiper) {
-        //     console.log(swiper)
-        // },
-        // onSlideChange() {
-        //     console.log('slide change')
-        // }
+        }
     },
-    components: {
-        Swiper,
-        SwiperSlide,
-        FoodCart
-    }
+    components: { FoodCart }
 }
 </script>
 <style lang="scss" scoped>
+.TopFood {
+    // padding: 1rem;
+    background-color: transparent;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 
-// .TopFood {
-//     // padding: 1rem;
-//     background-color: transparent;
-//     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    .trans {
+       
+        .items {
+           padding-bottom: 2rem;  
+ // background-color: rgb(255, 0, 0);
+            .container {
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                 padding: 1rem 0;
+                 margin-bottom: 1rem;
+          //  background-color: aqua;
+            }
+        }
 
-
-//     .trans {
-
-//         .items {
-//             padding-bottom: 2rem;
-
-//             // background-color: rgb(255, 0, 0);
-//             .container {
-//                 display: flex;
-//                 flex-wrap: nowrap;
-//                 flex-direction: row;
-//                 justify-content: space-around;
-//                 align-items: center;
-//                 padding: 1rem 0;
-//                 margin-bottom: 1rem;
-//                 //  background-color: aqua;
-//             }
-//         }
-
-//     }
+    }
 
 
 
@@ -128,15 +97,6 @@ export default {
         font-family: $font-dancing;
 
     }
-.items {
-                display: flex;
-                flex-wrap: nowrap;
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-                padding: 1rem 0;
-                margin-bottom: 1rem;
-                //  background-color: aqua;
-            }
 
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-card class="header">
    
-    <v-row>
+     <v-row no-gutters>
       <v-col class="col-4 banner-text">
         <h3>FlipDish</h3>
         <p>taste of life</p>

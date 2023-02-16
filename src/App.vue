@@ -1,15 +1,49 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <router-view></router-view>
+    <router-view ></router-view>
     <FooterPage></FooterPage>
-  </div>
+</div>
 </template>
 <script>
+import { collection, getDocs } from 'firebase/firestore';
+import dbase from '@/firebase/index'
 import NavBar from './components/NavBar.vue';
 import FooterPage from './components/FooterPage.vue';
+
 export default {
-  components: { NavBar, FooterPage}
+  components: { NavBar, FooterPage },
+  data() {
+    return {
+      menus: []
+    }
+  }, 
+  provide() {
+    return {
+     menus:this.menus
+    }
+  },
+  methods: {
+    async getdata() {
+      // console.log(dbase)
+      try {
+        const querySnapshot = await getDocs(collection(dbase, 'Menus'));
+        querySnapshot.forEach((doc) => {
+          //console.log(doc.id, " => ", doc.data());
+          this.menus.push(doc.data())
+        });
+
+        console.log(this.menus)
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+  },
+  beforeMount() {
+    this.getdata()
+
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -19,6 +53,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #111d19;
+  max-width: 100%;
+  overflow-x: hidden;
 
 }
 </style>
