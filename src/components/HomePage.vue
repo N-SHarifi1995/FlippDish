@@ -2,11 +2,10 @@
   <v-card class="home"> 
     
     <HeaderOne></HeaderOne>
-   <TipPart></TipPart>
+   <ChooseUs></ChooseUs>
   <MenuPart></MenuPart>
-  <ChooseUs></ChooseUs>
+  <TipPart></TipPart>
    <TopFood></TopFood>
-  
 </v-card>
     
   
@@ -20,12 +19,11 @@ import HeaderOne from './material/Header.vue';
 import ChooseUs from './material/ChooseUs.vue';
 import MenuPart from './material/MenuPart.vue';
 import TipPart from './material/TipPart.vue';
-
 import TopFood from './material/TopFood.vue';
 
 export default {
   name: 'HomePage',
-   components: { HeaderOne, ChooseUs, MenuPart, TipPart, TopFood  },
+   components: { HeaderOne, ChooseUs, MenuPart, TipPart, TopFood },
 
   data: () => ({
   
