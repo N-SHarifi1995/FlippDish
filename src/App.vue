@@ -6,21 +6,28 @@
 </div>
 </template>
 <script>
-import { collection, getDocs } from 'firebase/firestore';
+
+import { collection, getDocs,collectionGroup } from 'firebase/firestore';
 import dbase from '@/firebase/index'
+
 import NavBar from './components/NavBar.vue';
 import FooterPage from './components/FooterPage.vue';
 
 export default {
-  components: { NavBar, FooterPage },
+
+  components: { NavBar, FooterPage},
+
+
   data() {
     return {
-      menus: []
+      menus: [],
+      foods:[]
     }
   }, 
   provide() {
     return {
-     menus:this.menus
+     menus:this.menus,
+     foods:this.foods
     }
   },
   methods: {
@@ -33,17 +40,30 @@ export default {
           this.menus.push(doc.data())
         });
 
-        console.log(this.menus)
+        //console.log(this.menus)
       } catch (error) {
         console.log(error)
       }
 
+      try {
+        const q = await getDocs(collectionGroup(dbase, 'Food'));
+        q.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          this.foods.push(doc.data())
+       
+        });
+
+        
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   beforeMount() {
     this.getdata()
 
   }
+
 }
 </script>
 <style lang="scss" scoped>
