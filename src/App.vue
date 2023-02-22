@@ -1,55 +1,75 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+  <div id="app">
+    <NavBar></NavBar>
+    <router-view></router-view>
+    <FooterPage></FooterPage>
+  </div>
 </template>
-
 <script>
+import { collection, getDocs,collectionGroup } from 'firebase/firestore';
+import dbase from '@/firebase/index'
 
+import NavBar from './components/NavBar.vue';
+import FooterPage from './components/FooterPage.vue';
 export default {
-  name: 'App',
+  components: { NavBar, FooterPage },
+  data() {
+    return {
+      menus: [],
+      foods: []
+    }
+  }
+,
+provide() {
+  return {
+    menus: this.menus,
+    foods: this.foods
+  }
+},
+methods: {
+    async getdata() {
+    // console.log(dbase)
+    try {
+      const querySnapshot = await getDocs(collection(dbase, 'Menus'));
+      querySnapshot.forEach((doc) => {
+        //console.log(doc.id, " => ", doc.data());
+        this.menus.push(doc.data())
+      });
 
-  data: () => ({
-    //
-  }),
-};
+      //console.log(this.menus)
+    } catch (error) {
+      console.log(error)
+    }
+
+    try {
+      const q = await getDocs(collectionGroup(dbase, 'Food'));
+      q.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        this.foods.push(doc.data())
+
+      });
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+},
+beforeMount() {
+  this.getdata()
+
+}
+
+}
+
 </script>
+<style lang="scss" scoped>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: #111d19;
+
+}
+</style>
