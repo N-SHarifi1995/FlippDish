@@ -1,22 +1,18 @@
 <template>
-  
-    <v-card class="containner">
-      <v-tabs v-model="tab" color="error" align-tabs="end" bg-color="primary" class="tabs">
-        <v-tab class="b" :value="1">users</v-tab>
-        <v-tab class="b" :value="2">foods</v-tab>
-        <v-tab class="b" :value="3">menus</v-tab>
-        
-      </v-tabs>
-      <v-window v-model="tab">
-        <v-window-item v-for="n in 3" :key="n" :value="n">
-          <v-container fluid>
-            <component :is="component[n-1]" />
-        
-          </v-container>
-        </v-window-item>
-      </v-window>
-    </v-card>
+  <v-card class="containner">
+    <v-tabs  dark color="secondary" class="tabs">
+      <v-tab color="success" class="b">users</v-tab>
+      <v-tab class="b">foods</v-tab>
+      <v-tab class="b">menus</v-tab>
+      <v-tab-item v-for="n in 3" :key="n" class='smt' >
+        <v-container class="view">
+          <component :is="component[n - 1]" />
 
+        </v-container>
+      </v-tab-item>
+    </v-tabs>
+
+  </v-card>
 </template>
 
 <script>
@@ -27,10 +23,10 @@ export default {
   data() {
     return {
       tab: 0,
-      component:[FoodPanel,MenuPanel]
+      component: [FoodPanel, MenuPanel]
     }
 
-  },components:{FoodPanel,MenuPanel}
+  }, components: { FoodPanel, MenuPanel }
 
 
 
@@ -38,20 +34,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .containner {
-  @include displayflex;
-  flex-direction: column;
- 
-background-color: rgb(3, 25, 27);
+
   margin-top: 4rem;
 
 }
 
 .tabs {
   @include displayflex;
- 
-
+  background-color:#111d19;
+  flex-direction: column;
+  color: aliceblue;
+.smt{ background-color: #111d19;}
+  
   .b {
-    background-color: rgb(47, 255, 0);
+    background-color: #111d19;
+    color: white;
+    
   }
-}
-</style>
+}</style>

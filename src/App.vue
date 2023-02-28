@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <NavBar></NavBar>
     <router-view></router-view>
     <FooterPage></FooterPage>
-  </div>
+  </v-app>
 </template>
 <script>
 import { collection, getDocs,collectionGroup } from 'firebase/firestore';

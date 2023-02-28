@@ -1,7 +1,5 @@
 <template>
-   
-        
-       
+    
                 <v-card  padless class="Footer">
                     <v-row justify="center" no-gutters>
                         <v-btn v-for="link in links" :key="link"  text rounded class="my-2 btn">
@@ -12,9 +10,7 @@
                         </v-col>
                     </v-row>
                 </v-card>
-           
-
-   
+ 
 </template>
 
 <script>
