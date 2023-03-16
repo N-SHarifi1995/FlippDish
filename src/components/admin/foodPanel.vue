@@ -1,24 +1,27 @@
 
 <template>
   <div class="table">
-    <v-simple-table dark>
+    
+     <v-simple-table dark>
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left" v-for="head in Object.keys(foods[0])" :key="head.id">
+            <!-- <th class="text-left" v-for="head in Object.keys(foods[3])" :key="head.id">
+              {{ head }}
+            </th> -->
+            <th class="text-left" v-for="head in heads" :key="head">
               {{ head }}
             </th>
-
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in foods" :key="item.name">
+          <tr v-for="item in foods.values" :key="item.id">
             <td>{{ item.name }}</td>
             <td>{{ item.menuId }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.explain }}</td>
-            <td><v-btn>delet</v-btn></td>
-            <td><v-btn><v-icon class="">mdi-delet</v-icon></v-btn></td>
+            <td><v-btn  @click=" delet(item.id)"><v-icon class="">mdi-delete</v-icon></v-btn></td>
+            <td><v-btn><v-icon class="">mdi-pencil</v-icon></v-btn></td>
           </tr>
         </tbody>
       </template>
@@ -30,13 +33,15 @@
 
 <script>
 import adminForm from './adminForm.vue';
+import {deleteDoc, doc} from "firebase/firestore";
+import dbase from '@/firebase/index'
 export default {
   name: "FoodPanel",
   components:{adminForm},
   data() {
     return {
-      switchform:false
-      
+      switchform:false,
+      heads:['name',"menuId", "explain"," price ","src"]
 
     };
   },
@@ -60,9 +65,18 @@ export default {
     },
     show(){
       this.switchform=!this.switchform
-    console.log(this.switchform)}
-  }
-
+    console.log(this.switchform)},
+   
+delet(y){
+ 
+   try{ deleteDoc(doc(dbase,'Food',y));} 
+   catch(err){console.log(err)}
+  },
+ 
+  }, mounted() {
+    console.log(this.foods)
+  },
+ 
 
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
   <v-app id="app">
     <NavBar></NavBar>
-    <router-view></router-view>
+    <router-view @refresh="console.log('hhhh')"></router-view>
     <FooterPage></FooterPage>
   </v-app>
 </template>
 <script>
-import { collection, getDocs,collectionGroup } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import dbase from '@/firebase/index'
 
 import NavBar from './components/NavBar.vue';
@@ -16,49 +16,102 @@ export default {
   data() {
     return {
       menus: [],
-      foods: []
+     foods: {}
     }
   }
-,
-provide() {
-  return {
-    menus: this.menus,
-    foods: this.foods
-  }
-},
-methods: {
-    async getdata() {
-    // console.log(dbase)
-    try {
-      const querySnapshot = await getDocs(collection(dbase, 'Menus'));
-      querySnapshot.forEach((doc) => {
-        //console.log(doc.id, " => ", doc.data());
-        this.menus.push(doc.data())
-      });
-
-      //console.log(this.menus)
-    } catch (error) {
-      console.log(error)
+  ,
+  computed:{
+    
+  },
+  provide() {
+    return {
+      menus: this.menus,
+      foods: this.foods
     }
+  },
+   methods: {
+   getdata() {
+    
+      // try {
+      //   onSnapshot(collection(dbase, 'Food'), (q) => {
 
-    try {
-      const q = await getDocs(collectionGroup(dbase, 'Food'));
-      q.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        this.foods.push(doc.data())
+      //     q.forEach((doc) => {
+      //       // console.log(doc.id, " => ", doc.data());
+      //       let myfood = doc.data()
+      //       myfood.id = doc.id
+      //       this.foods.push(myfood)
 
-      });
+      //     })
 
 
-    } catch (error) {
-      console.log(error)
-    }
+      //   });
+
+      // } catch (error) {
+      //   console.log(error)
+      // }
+      //           try {
+      //       let res= await getDocs(collection(dbase, 'Food'))
+
+      //           res.forEach((doc) => {
+      //             // console.log(doc.id, " => ", doc.data());
+      //             let myfood = doc.data()
+      //             myfood.id = doc.id
+      //           this.foods.push(myfood)
+
+      //           })
+
+      //             ;
+      //         }
+      // catch (error) {
+      //         console.log(error)
+      //       }
+
+      // console.log(dbase)
+      // try {
+      //   onSnapshot(collection(dbase, 'Menus'), (res) => {
+      //     res.forEach((doc) => {
+      //       //console.log(doc.id, " => ", doc.data());
+      //       this.menus.push(doc.data())
+      //     });
+      //   });
+
+
+      //   //console.log(this.menus)
+      // } catch (error) {
+      //   console.log(error)
+      // }
+
+      try {
+        onSnapshot(collection(dbase , 'Food'), (q) => {
+         
+          let fbfood = []
+            console.log(fbfood);
+          q.forEach((doc) => {
+            // console.log(doc.id, " => ", doc.data());
+            let myfood = doc.data()
+            myfood.id = doc.id
+            fbfood.push(myfood)
+
+          })
+          this.foods.values= fbfood
+          console.log(this.foods)
+            ;
+        });
+
+
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  },
+
+
+
+  beforeMount() {
+   this.getdata()
+
   }
-},
-beforeMount() {
-  this.getdata()
-
-}
 
 }
 
