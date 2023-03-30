@@ -4,16 +4,19 @@
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <form class="fform" color='#ffffff'>
-          <v-text-field class="input" dark color='#ffffff' v-model="name" :counter="10" label="Name"
+          <v-text-field class="input" dark color='#ffffff' v-model="food.name" :counter="10" label="Name"
             required></v-text-field>
-          <v-combobox dark v-model="select" item-text="text" item-value="value" color='#ffffff' :items="items"
+          <v-combobox dark v-model="food.select" item-text="text" item-value="value" color='#ffffff' :items="items"
             label="Menus"></v-combobox>
-            <v-text-field class="input" dark color='#ffffff' v-model="src" :counter="10" label="image"
+          <v-text-field class="input" dark color='#ffffff' v-model="food.src" :counter="10" label="image"
             required></v-text-field>
-          <v-text-field dark v-model="price" color='#ffffff' label="price" required></v-text-field>
-          <v-textarea v-model="explain" solo dark name="input-7-4" color='#ffffff' label="Explain"></v-textarea>
+          <v-text-field dark v-model="food.price" color='#ffffff' label="price" required></v-text-field>
+          <v-textarea v-model="food.explain" solo dark name="input-7-4" color='#ffffff' label="Explain"></v-textarea>
           <div class="btns"> <v-btn class="mr-4" @click="submit">
               add
+            </v-btn>
+            <v-btn class="mr-4" @click="edite(food.id)">
+             edite
             </v-btn>
             <v-btn @click="clear">
               clear
@@ -29,8 +32,9 @@
 
 <script>
 
-import { collection,  addDoc } from "firebase/firestore";
+import { collection, updateDoc,doc,addDoc } from "firebase/firestore";
 import dbase from '@/firebase/index'
+
 
 export default {
   name: "adminForm",
@@ -43,28 +47,30 @@ export default {
         { text: 'fastfood', value: '3' },
         { text: 'seafood', value: '2' },
       ],
-      name: '',
-      explain: '',
-      menuId: 1,
-      price: '',
-      src:''
+      food:this.newObj
+      // name: '',
+      // explain: '',
+      // menuId: 1,
+      // price: '',
+      // src:''
     };
   },
+  props: ['newObj'],
   methods: {
 
     async submit() {
       try {
         const myfood = collection(dbase, "Food");
         await addDoc(myfood, {
-          name: this.name,
-          explain: this.explain,
-          menuId: this.menuId,
-          price: this.price,
-         src: this.src
+          name: this.food.name,
+          explain: this.food.explain,
+          menuId: this.food.select.value,
+          price: this.food.price,
+          src: this.food.src
 
         })
-       // this.$parent.$emit('refresh')
-       
+    this.clear()
+
       }
       catch (er) {
         console.error(er);
@@ -72,16 +78,32 @@ export default {
 
 
     },
+    async edite(id) {
+      try {
+        const myFood =doc(dbase, 'Food', id);
+        updateDoc(myFood,this.food);
+        this.clear()
+      }
+      catch (err) { console.log(err) }
+
+      }
+     
+
+
+ ,
     clear() {
-      this.name = ''
-      this.price = ''
-      this.select = []
-      this.explain = ''
-      this.src=''
+      this.food.name = ''
+      this.food.price = ''
+      this.food.select = []
+      this.food.explain = ''
+      this.food.src = ''
 
     },
 
   },
+  mounted() {
+    console.log(this.newObj)
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -91,7 +113,10 @@ export default {
 
   .fform {
     color: aliceblue;
-    .btns{@include displayflex}
+
+    .btns {
+      @include displayflex
+    }
   }
 
   .input {

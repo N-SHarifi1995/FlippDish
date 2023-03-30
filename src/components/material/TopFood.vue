@@ -47,28 +47,28 @@ export default {
     name: "TopFood",
     data() {
         return {
-            // foods: [
-            //     { id: '1', name: "First", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '2', name: "second", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '3', name: "third", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '4', name: "forth", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '5', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '6', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '7', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '8', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '9', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '10', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '11', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '12', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '13', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '14', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '15', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            //     { id: '16', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
-            // ],
+            foods: [
+                { id: '1', name: "First", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '2', name: "second", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '3', name: "third", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '4', name: "forth", menuId: "2", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '5', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '6', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '7', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '8', name: "fifth", menuId: "3", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '9', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '10', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '11', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '12', name: "fifth", menuId: "1", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '13', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '14', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '15', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+                { id: '16', name: "fifth", menuId: "4", price: '2000$', explain: "This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN", src: "mm.jpg" },
+            ],
             model: 0
         };
     },
-    inject:['foods'],
+    // inject:['foods'],
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`);
