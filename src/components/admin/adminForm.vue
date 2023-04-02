@@ -4,19 +4,21 @@
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <form class="fform" color='#ffffff'>
-          <v-text-field class="input" dark color='#ffffff' v-model="food.name" :counter="10" label="Name"
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name" :counter="10" label="Name"
             required></v-text-field>
-          <v-combobox dark v-model="food.select" item-text="text" item-value="value" color='#ffffff' :items="items"
-            label="Menus"></v-combobox>
-          <v-text-field class="input" dark color='#ffffff' v-model="food.src" :counter="10" label="image"
+          <v-combobox dark v-if="type === 'food'" v-model="recivedData.select" item-text="text" item-value="value"
+            color='#ffffff' :items="items" label="Menus"></v-combobox>
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src" :counter="10" label="image"
             required></v-text-field>
-          <v-text-field dark v-model="food.price" color='#ffffff' label="price" required></v-text-field>
-          <v-textarea v-model="food.explain" solo dark name="input-7-4" color='#ffffff' label="Explain"></v-textarea>
+          <v-text-field dark v-model="recivedData.price" v-if="type === 'food'" color='#ffffff' label="price"
+            required></v-text-field>
+          <v-textarea v-model="recivedData.explain" v-if="type === 'food'" solo dark name="input-7-4" color='#ffffff'
+            label="Explain"></v-textarea>
           <div class="btns"> <v-btn class="mr-4" @click="submit">
               add
             </v-btn>
             <v-btn class="mr-4" @click="edite(food.id)">
-             edite
+              edite
             </v-btn>
             <v-btn @click="clear">
               clear
@@ -32,7 +34,7 @@
 
 <script>
 
-import { collection, updateDoc,doc,addDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
 import dbase from '@/firebase/index'
 
 
@@ -47,56 +49,67 @@ export default {
         { text: 'fastfood', value: '3' },
         { text: 'seafood', value: '2' },
       ],
-      food:this.newObj
-      // name: '',
-      // explain: '',
-      // menuId: 1,
-      // price: '',
-      // src:''
+      recivedData: this.newObj
     };
   },
-  props: ['newObj'],
+  props: ['newObj', 'type'],
   methods: {
 
     async submit() {
-      try {
-        const myfood = collection(dbase, "Food");
-        await addDoc(myfood, {
-          name: this.food.name,
-          explain: this.food.explain,
-          menuId: this.food.select.value,
-          price: this.food.price,
-          src: this.food.src
+      if (this.type === 'food') {
+        try {
+          const myfood = collection(dbase, "Food");
+          await addDoc(myfood, {
+            name: this.recivedData.name,
+            explain: this.recivedData.explain,
+            menuId: this.recivedData.select.value,
+            price: this.recivedData.price,
+            src: this.recivedData.src
 
-        })
-    this.clear()
+          })
+          this.clear()
+        }
+        catch (er) {
+          console.error(er);
+        }
+      } else if (this.type === 'menu') {
+        console.log('m')
+        try {
+          const myMenu = collection(dbase, "Menus");
+          await addDoc(myMenu, {
+            name: this.recivedData.name,
+            src: this.recivedData.src
+          })
+          this.clear()
 
+        }
+        catch (er) {
+          console.error(er);
+        }
       }
-      catch (er) {
-        console.error(er);
-      }
+
 
 
     },
     async edite(id) {
       try {
-        const myFood =doc(dbase, 'Food', id);
-        updateDoc(myFood,this.food);
+        const myFood = doc(dbase, 'Food', id);
+        updateDoc(myFood, this.food);
         this.clear()
       }
       catch (err) { console.log(err) }
 
-      }
-     
+    }
 
 
- ,
+
+    ,
     clear() {
-      this.food.name = ''
-      this.food.price = ''
-      this.food.select = []
-      this.food.explain = ''
-      this.food.src = ''
+      this.recivedData.name = ''
+      this.recivedData.price = ''
+      this.recivedData.select = []
+      this.recivedData.explain = ''
+      this.recivedData.src = ''
 
     },
 

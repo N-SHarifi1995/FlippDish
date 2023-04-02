@@ -6,40 +6,50 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import dbase from '../firebase/index'
 export default new Vuex.Store({
   state: {
-    foods:[]
+    foods:[],
+    menus:[]
   },
   getters: {
   },
   mutations: {
     setFood(state,foods){
       state.foods=foods
+    },
+    setMenu(state,menus){
+      state.menus=menus
     }
   },
   actions: {
     fetchData({commit}){
       
       try {
-       // console.log('hi')
         onSnapshot(collection(dbase , 'Food'), (q) => {
-         
           let fbfood = []
-            
           q.forEach((doc) => {
-           //console.log(doc.id, " => ", doc.data());
             let myfood = doc.data()
             myfood.id = doc.id
             fbfood.push(myfood)
-         //  console.log(fbfood);
           })
           commit('setFood',fbfood)
-          
         });
-
-
-
       } catch (error) {
         console.log(error)
       }
+      try {
+    
+         onSnapshot(collection(dbase , 'Menus'), (q) => {
+           let fbMenu = []
+           q.forEach((doc) => {
+             let myMenu = doc.data()
+             myMenu.id = doc.id
+             fbMenu.push(myMenu)
+           })
+           console.log(fbMenu)
+           commit('setMenu',fbMenu)
+         });
+       } catch (error) {
+         console.log(error)
+       }
     }
     }
   ,

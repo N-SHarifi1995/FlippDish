@@ -29,7 +29,7 @@
       </template>
     </v-simple-table>
     <v-btn class="btn" @click="show" >{{ btnText }}</v-btn>
-    <adminForm :newObj="newObj" v-if="switchform"></adminForm>
+    <adminForm :type="'food'" :newObj="newObj" v-if="switchform"></adminForm>
   </div>
 </template>
 
