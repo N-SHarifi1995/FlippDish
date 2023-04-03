@@ -17,7 +17,7 @@
           <div class="btns"> <v-btn class="mr-4" @click="submit">
               add
             </v-btn>
-            <v-btn class="mr-4" @click="edite(food.id)">
+            <v-btn class="mr-4" @click="edite(recivedData.id)">
               edite
             </v-btn>
             <v-btn @click="clear">
@@ -56,52 +56,84 @@ export default {
   methods: {
 
     async submit() {
+      let mycolection = null
+      let myObject = null
+      //const myMenu = collection(dbase, "Menus")
       if (this.type === 'food') {
-        try {
-          const myfood = collection(dbase, "Food");
-          await addDoc(myfood, {
-            name: this.recivedData.name,
-            explain: this.recivedData.explain,
-            menuId: this.recivedData.select.value,
-            price: this.recivedData.price,
-            src: this.recivedData.src
-
-          })
-          this.clear()
-        }
-        catch (er) {
-          console.error(er);
-        }
-      } else if (this.type === 'menu') {
-        console.log('m')
-        try {
-          const myMenu = collection(dbase, "Menus");
-          await addDoc(myMenu, {
-            name: this.recivedData.name,
-            src: this.recivedData.src
-          })
-          this.clear()
-
-        }
-        catch (er) {
-          console.error(er);
+        mycolection = collection(dbase, "Food")
+        myObject = {
+          name: this.recivedData.name,
+          explain: this.recivedData.explain,
+          menuId: this.recivedData.select.value,
+          price: this.recivedData.price,
+          src: this.recivedData.src
         }
       }
+      else if (this.type === 'menu') {
+        console.log('m')
 
+        mycolection = collection(dbase, "Menus")
+        myObject = {
+          name: this.recivedData.name,
+          src: this.recivedData.src
+        }
+      }
+      try {
+        await addDoc(mycolection, myObject)
+        this.clear()
+      }
+      catch (er) {
+        console.error(er);
+      }
+      // if (this.type === 'food') {
+      //   try {
+      //     const myfood = collection(dbase, "Food");
+      //     await addDoc(myfood, {
+      //       name: this.recivedData.name,
+      //       explain: this.recivedData.explain,
+      //       menuId: this.recivedData.select.value,
+      //       price: this.recivedData.price,
+      //       src: this.recivedData.src
 
+      //     })
+      //     this.clear()
+      //   }
+      //   catch (er) {
+      //     console.error(er);
+      //   }
+      // } else if (this.type === 'menu') {
+      //   console.log('m')
+      //   try {
+      //     const myMenu = collection(dbase, "Menus");
+      //     await addDoc(myMenu, {
+      //       name: this.recivedData.name,
+      //       src: this.recivedData.src
+      //     })
+      //     this.clear()
+
+      //   }
+      //   catch (er) {
+      //     console.error(er);
+      //   }
+      // }
 
     },
     async edite(id) {
+      let myDoc = null
+      
+      if (this.type === 'food') {
+        myDoc = doc(dbase, "Food",id)
+       
+      }
+      else if (this.type === 'menu') {
+        myDoc = doc(dbase, "Menus",id) 
+      }
       try {
-        const myFood = doc(dbase, 'Food', id);
-        updateDoc(myFood, this.food);
+        updateDoc(myDoc, this.recivedData);
         this.clear()
       }
       catch (err) { console.log(err) }
-
     }
-
-
 
     ,
     clear() {
