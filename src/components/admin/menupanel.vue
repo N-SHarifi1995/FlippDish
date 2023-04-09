@@ -73,7 +73,7 @@ export default {
     },
     delet(y) {
 
-      try { deleteDoc(doc(dbase, 'Food', y)); }
+      try { deleteDoc(doc(dbase, 'Menus', y)); }
       catch (err) { console.log(err) }
     },
     change(item) {

@@ -4,11 +4,11 @@
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <form class="fform" color='#ffffff'>
-          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name" :counter="10" label="Name"
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name"  label="Name"
             required></v-text-field>
-          <v-combobox dark v-if="type === 'food'" v-model="recivedData.select" item-text="text" item-value="value"
+          <v-combobox dark v-if="type === 'food'" v-model="select" item-text="text" item-value="value"
             color='#ffffff' :items="items" label="Menus"></v-combobox>
-          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src" :counter="10" label="image"
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src"  label="image"
             required></v-text-field>
           <v-text-field dark v-model="recivedData.price" v-if="type === 'food'" color='#ffffff' label="price"
             required></v-text-field>
@@ -37,12 +37,12 @@
 import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
 import dbase from '@/firebase/index'
 
-
+import Swal from 'sweetalert2'
 export default {
   name: "adminForm",
   data() {
     return {
-      select: [],
+     select:null,
       items: [
         { text: 'brakfast', value: '1' },
         { text: 'drinks', value: '4' },
@@ -53,21 +53,30 @@ export default {
     };
   },
   props: ['newObj', 'type'],
+  watch:{
+    select(newValue, oldValue){
+      if(newValue!= oldValue){
+        console.log(newValue)
+        this.recivedData.menuId=newValue.value
+      }
+    }
+  },
+ 
   methods: {
 
     async submit() {
       let mycolection = null
       let myObject = null
-      //const myMenu = collection(dbase, "Menus")
       if (this.type === 'food') {
         mycolection = collection(dbase, "Food")
         myObject = {
           name: this.recivedData.name,
           explain: this.recivedData.explain,
-          menuId: this.recivedData.select.value,
+          menuId: this.select.value,
           price: this.recivedData.price,
           src: this.recivedData.src
         }
+        console.log(myObject.menuId)
       }
       else if (this.type === 'menu') {
         console.log('m')
@@ -80,44 +89,20 @@ export default {
       }
       try {
         await addDoc(mycolection, myObject)
+        new Swal({
+          text: 'insert is done',
+          icon: 'success'
+
+        })
         this.clear()
       }
       catch (er) {
         console.error(er);
       }
-      // if (this.type === 'food') {
-      //   try {
-      //     const myfood = collection(dbase, "Food");
-      //     await addDoc(myfood, {
-      //       name: this.recivedData.name,
-      //       explain: this.recivedData.explain,
-      //       menuId: this.recivedData.select.value,
-      //       price: this.recivedData.price,
-      //       src: this.recivedData.src
+     
 
-      //     })
-      //     this.clear()
-      //   }
-      //   catch (er) {
-      //     console.error(er);
-      //   }
-      // } else if (this.type === 'menu') {
-      //   console.log('m')
-      //   try {
-      //     const myMenu = collection(dbase, "Menus");
-      //     await addDoc(myMenu, {
-      //       name: this.recivedData.name,
-      //       src: this.recivedData.src
-      //     })
-      //     this.clear()
-
-      //   }
-      //   catch (er) {
-      //     console.error(er);
-      //   }
-      // }
-
-    },
+    }
+  ,
     async edite(id) {
       let myDoc = null
       
@@ -129,7 +114,13 @@ export default {
         myDoc = doc(dbase, "Menus",id) 
       }
       try {
-        updateDoc(myDoc, this.recivedData);
+        console.log(this.recivedData)
+        updateDoc(myDoc,this.recivedData);
+        new Swal({
+          text: 'upadate is done',
+          icon: 'success'
+
+        })
         this.clear()
       }
       catch (err) { console.log(err) }
@@ -139,7 +130,7 @@ export default {
     clear() {
       this.recivedData.name = ''
       this.recivedData.price = ''
-      this.recivedData.select = []
+      this.select = []
       this.recivedData.explain = ''
       this.recivedData.src = ''
 
@@ -147,7 +138,8 @@ export default {
 
   },
   mounted() {
-    console.log(this.newObj)
+    this.select=this.recivedData.menuId
+  
   }
 }
 </script>
