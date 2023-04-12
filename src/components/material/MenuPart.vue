@@ -4,7 +4,7 @@
         <v-row no-gutters class="title">Menus</v-row>
         <v-row no-gutters>
             <v-col class="col col-3" v-for="menu of menus" :key="menu.id">
-                <v-card class="menu">
+                <v-card class="menu" :to="{name:'foodlist',params:{menu:menu.name}}">
                     <div class="imgcontainer">
                         <v-img class='img'  alt="user" :src="getsrc(menu.src)"></v-img>
                     </div>
@@ -23,18 +23,21 @@ export default {
     name: 'MenuPart',
     data() {
         return {
-            
+       
         }
 
     },
-   inject:['menus'],
+  computed:{
+    menus(){return this.$store.state.menus}
+  },
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`)
         }
     },
     mounted() {
-        console.log(this.menus )
+      
+       console.log(this.menus)
 
        
 

@@ -45,7 +45,7 @@ export default {
       newObj: {
         name: '',
         explain: '',
-        menuId: 1,
+        menuId: '',
         price: '',
         src: ''
       },

@@ -4,11 +4,11 @@
       <v-col cols="4"></v-col>
       <v-col cols="4">
         <form class="fform" color='#ffffff'>
-          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name" :counter="10" label="Name"
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name"  label="Name"
             required></v-text-field>
-          <v-combobox dark v-if="type === 'food'" v-model="recivedData.select" item-text="text" item-value="value"
+          <v-combobox dark v-if="type === 'food'" v-model="select" 
             color='#ffffff' :items="items" label="Menus"></v-combobox>
-          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src" :counter="10" label="image"
+          <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src"  label="image"
             required></v-text-field>
           <v-text-field dark v-model="recivedData.price" v-if="type === 'food'" color='#ffffff' label="price"
             required></v-text-field>
@@ -17,7 +17,7 @@
           <div class="btns"> <v-btn class="mr-4" @click="submit">
               add
             </v-btn>
-            <v-btn class="mr-4" @click="edite(food.id)">
+            <v-btn class="mr-4" @click="edite(recivedData.id)">
               edite
             </v-btn>
             <v-btn @click="clear">
@@ -37,77 +37,100 @@
 import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
 import dbase from '@/firebase/index'
 
-
+import Swal from 'sweetalert2'
 export default {
   name: "adminForm",
   data() {
     return {
-      select: [],
+     select:null,
       items: [
-        { text: 'brakfast', value: '1' },
-        { text: 'drinks', value: '4' },
-        { text: 'fastfood', value: '3' },
-        { text: 'seafood', value: '2' },
+         'brakfast' ,
+         'drinks', 
+         'fastfood',
+         'seafood',
       ],
       recivedData: this.newObj
     };
   },
   props: ['newObj', 'type'],
+  watch:{
+    select(newValue, oldValue){
+      if(newValue!= oldValue){
+        console.log(newValue)
+        this.recivedData.menuId=newValue.value
+      }
+    }
+  },
+ 
   methods: {
 
     async submit() {
+      let mycolection = null
+      let myObject = null
       if (this.type === 'food') {
-        try {
-          const myfood = collection(dbase, "Food");
-          await addDoc(myfood, {
-            name: this.recivedData.name,
-            explain: this.recivedData.explain,
-            menuId: this.recivedData.select.value,
-            price: this.recivedData.price,
-            src: this.recivedData.src
-
-          })
-          this.clear()
+        mycolection = collection(dbase, "Food")
+        myObject = {
+          name: this.recivedData.name,
+          explain: this.recivedData.explain,
+          menuId: this.select,
+          price: this.recivedData.price,
+          src: this.recivedData.src
         }
-        catch (er) {
-          console.error(er);
-        }
-      } else if (this.type === 'menu') {
+        console.log(myObject.menuId)
+      }
+      else if (this.type === 'menu') {
         console.log('m')
-        try {
-          const myMenu = collection(dbase, "Menus");
-          await addDoc(myMenu, {
-            name: this.recivedData.name,
-            src: this.recivedData.src
-          })
-          this.clear()
 
-        }
-        catch (er) {
-          console.error(er);
+        mycolection = collection(dbase, "Menus")
+        myObject = {
+          name: this.recivedData.name,
+          src: this.recivedData.src
         }
       }
-
-
-
-    },
-    async edite(id) {
       try {
-        const myFood = doc(dbase, 'Food', id);
-        updateDoc(myFood, this.food);
+        await addDoc(mycolection, myObject)
+        new Swal({
+          text: 'insert is done',
+          icon: 'success'
+
+        })
+        this.clear()
+      }
+      catch (er) {
+        console.error(er);
+      }
+     
+
+    }
+  ,
+    async edite(id) {
+      let myDoc = null
+      
+      if (this.type === 'food') {
+        myDoc = doc(dbase, "Food",id)
+       
+      }
+      else if (this.type === 'menu') {
+        myDoc = doc(dbase, "Menus",id) 
+      }
+      try {
+        console.log(this.recivedData)
+        updateDoc(myDoc,this.recivedData);
+        new Swal({
+          text: 'upadate is done',
+          icon: 'success'
+
+        })
         this.clear()
       }
       catch (err) { console.log(err) }
-
     }
-
-
 
     ,
     clear() {
       this.recivedData.name = ''
       this.recivedData.price = ''
-      this.recivedData.select = []
+      this.select = []
       this.recivedData.explain = ''
       this.recivedData.src = ''
 
@@ -115,7 +138,8 @@ export default {
 
   },
   mounted() {
-    console.log(this.newObj)
+    this.select=this.recivedData.menuId
+  
   }
 }
 </script>

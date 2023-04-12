@@ -1,16 +1,12 @@
 <template>
-  <v-card class="home"> 
-    
-    <HeaderOne></HeaderOne>
-   <ChooseUs></ChooseUs>
-  <MenuPart></MenuPart>
-  <TipPart></TipPart>
-   <TopFood></TopFood>
-</v-card>
-    
-  
-  
+  <v-card class="home">
 
+    <HeaderOne></HeaderOne>
+    <ChooseUs></ChooseUs>
+    <MenuPart></MenuPart>
+    <TipPart></TipPart>
+    <TopFood></TopFood>
+  </v-card>
 </template>
 
 <script>
@@ -23,15 +19,15 @@ import TopFood from './material/TopFood.vue';
 
 export default {
   name: 'HomePage',
-   components: { HeaderOne, ChooseUs, MenuPart, TipPart, TopFood },
+  components: { HeaderOne, ChooseUs, MenuPart, TipPart, TopFood },
 
   data: () => ({
-  
+
   })
 }
 </script >
 <style lang="scss" scoped>
-  .home{
-    background-color: transparent;
-  }
+.home {
+  background-color: transparent;
+}
 </style>
