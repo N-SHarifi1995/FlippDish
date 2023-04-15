@@ -35,7 +35,7 @@
 <script>
 
 import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
-import dbase from '@/firebase/index'
+import {dbase} from '@/firebase/index'
 
 import Swal from 'sweetalert2'
 export default {
@@ -56,8 +56,9 @@ export default {
   watch:{
     select(newValue, oldValue){
       if(newValue!= oldValue){
-        console.log(newValue)
-        this.recivedData.menuId=newValue.value
+        
+        this.recivedData.menuId=newValue
+        console.log( this.recivedData.menuId)
       }
     }
   },
@@ -139,6 +140,7 @@ export default {
   },
   mounted() {
     this.select=this.recivedData.menuId
+    console.log(this.select)
   
   }
 }
