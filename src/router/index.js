@@ -4,6 +4,7 @@ import HomeView from '../components/HomePage'
 import AdminPanel from '../components/admin/adminpanel'
 import FoodList from '../components/material/FoodList'
 import SignUp from '../components/userform/SignUp'
+import SignIn from '../components/userform/SignIn'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/SignUp',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/SignIn',
+    name: 'SignIn',
+    component: SignIn
   },
  
 ]

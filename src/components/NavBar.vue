@@ -13,25 +13,25 @@
 
                 </template>
                 <v-list>
-                    <v-list-item >
+                    <v-list-item>
                         <v-list-item-title>
                             <router-link class="link" :to="{ name: 'signUp' }">ایجاد حساب </router-link>
                         </v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item >
+                    <v-list-item>
                         <v-list-item-title>
                             <router-link class="link" :to="{ name: 'wishList' }"> برگزیده ها</router-link>
                         </v-list-item-title>
                     </v-list-item>
-                    <v-list-item >
+                    <v-list-item>
                         <v-list-item-title>
                             <router-link class="link" :to="{ name: 'signIn' }"> ورود</router-link>
                         </v-list-item-title>
                     </v-list-item>
-                    <v-list-item >
+                    <v-list-item>
                         <v-list-item-title>
-                            <a  class="link" @click='signOut()'> خروج</a>
+                            <a class="link" @click='signout'> خروج</a>
                         </v-list-item-title>
 
                     </v-list-item>
@@ -112,12 +112,26 @@
 </template>
 
 <script>
+import { app } from '@/firebase/firebase'
+import { signOut, getAuth } from "firebase/auth";
 export default {
     name: 'NavBar',
 
     data: () => ({
 
     }),
+    methods: {
+        signout() {
+            const auth = getAuth(app);
+            signOut(auth).then(() => {
+                // Sign-out successful.
+            }).catch((error) => {
+                // An error happened.
+                console.log(error)
+            });
+
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

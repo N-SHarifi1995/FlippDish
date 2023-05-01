@@ -36,7 +36,7 @@
 <script>
 import adminForm from './adminForm.vue';
 import { deleteDoc, doc } from "firebase/firestore";
-import {dbase} from '@/firebase/index'
+import {dbase} from '@/firebase/firebase'
 export default {
   name: "FoodPanel",
   components: { adminForm },

@@ -6,7 +6,8 @@
   </v-app>
 </template>
 <script>
-
+import { app } from '@/firebase/firebase'
+import { getAuth } from "firebase/auth";
 import NavBar from './components/NavBar.vue';
 import FooterPage from './components/FooterPage.vue';
 export default {
@@ -31,8 +32,13 @@ export default {
 
   beforeMount() {
     this.getdata()
-
-  }
+    const auth = getAuth(app)
+    const curentUser = auth.currentUser
+    console.log(curentUser)
+  },
+  beforeUpdate(){const auth = getAuth(app)
+    const curentUser = auth.currentUser
+    console.log(curentUser)}
 
 }
 

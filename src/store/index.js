@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 import { collection, onSnapshot } from 'firebase/firestore';
-import dbase from '../firebase/index'
+import {dbase} from '../firebase/firebase'
 export default new Vuex.Store({
   state: {
     foods:[],

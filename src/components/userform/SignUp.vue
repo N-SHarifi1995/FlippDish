@@ -1,16 +1,17 @@
 <template>
   <div class="myform">
+    <h1>sigup</h1>
     <v-row no-gutters>
       <v-col cols="6" class="offset-3">
 
-        <!-- <div class="names">
-          <v-text-field clearable outlined v-model="name" label="firstName"></v-text-field>
-          <v-text-field clearable v-model="lastname" label="lastName">
-          </v-text-field>
-        </div> -->
-        <v-text-field clearable  v-model="email" label="email" required>
+        <div class="names">
+          <v-text-field  clearable dark outlined v-model="name" label="firstName"></v-text-field>
+          <v-text-field clearable dark v-model="lastname" label="lastName"> </v-text-field>
+         
+        </div>
+        <v-text-field clearable dark v-model="email" label="email" required>
         </v-text-field>
-        <v-text-field clearable v-model="password" label="password" required>
+        <v-text-field clearable dark v-model="password" label="password" required>
         </v-text-field>
 
         <v-btn class="mr-4" @click="signup" title="sign">
@@ -19,6 +20,7 @@
         <v-btn>
           logIn
         </v-btn>
+        <p>I have an acount <v-btn text :to="{name:'SignIn'}">logIn</v-btn></p>
 
       </v-col>
     </v-row>
@@ -27,10 +29,10 @@
   
 <script>
 // @ is an alias to /src
-import validator from '@/services/validatore'
+//import validator from '@/services/validatore'
 //import Swal from 'sweetalert2'
-//import auth from '@/firebase/index'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from '@/firebase/firebase'
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default {
   name: 'signUp',
@@ -43,23 +45,24 @@ export default {
       email: '',
       password: '',
 
-      ...validator
+
     }
   },
   mounted() {
 
   }, methods: {
     async signup() {
-      console.log(typeof this.email,this.password)
-   
-      //auth().createUserWithEmailAndPassword( this.email, this.password)
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth,this.email,this.password)
+      console.log( this.email, this.password)
+      createUserWithEmailAndPassword(getAuth(app), this.email, this.password)
         .then((userCredential) => {
-          // Signed 'in' 
+          updateProfile(getAuth(app),{
+            displayName: this.name,
+             lastname: this.lastName
+          }).then(
+            console.log(getAuth(app).currentUser.displayName)
+          )
           alert(userCredential)
-          //const user = userCredential.user;
-          // ...
+         
         })
         .catch((error) => {
           const errorCode = error.code;

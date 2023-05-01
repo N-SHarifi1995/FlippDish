@@ -35,7 +35,7 @@
 <script>
 
 import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
-import {dbase} from '@/firebase/index'
+import {dbase} from '@/firebase/firebase'
 
 import Swal from 'sweetalert2'
 export default {
