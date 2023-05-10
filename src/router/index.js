@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../components/HomePage'
 import AdminPanel from '../components/admin/adminpanel'
 import FoodList from '../components/material/FoodList'
-import SignUp from '../components/userform/SignUp'
-import SignIn from '../components/userform/SignIn'
+import userForm from '../components/userform/userForm'
+//import SignIn from '../components/userform/SignIn'
 
 Vue.use(VueRouter)
 
@@ -12,6 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    mata:{requireAuth:true},
     component: HomeView
   },
   {
@@ -28,12 +29,12 @@ const routes = [
   {
     path: '/SignUp',
     name: 'SignUp',
-    component: SignUp
+    component: userForm
   },
   {
     path: '/SignIn',
     name: 'SignIn',
-    component: SignIn
+    component: userForm
   },
  
 ]
