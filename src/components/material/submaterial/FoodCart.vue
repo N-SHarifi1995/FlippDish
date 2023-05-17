@@ -19,11 +19,11 @@
 
                 <!-- <p class="d-hidden explain "  :class="{ 'onhover': hover }">{{ food.explain }}</p> -->
                 <v-fade-transition>
-               
+
                     <div v-if="hover">
                         <p class="explain ">{{ food.explain }}</p>
                     </div>
-               </v-fade-transition>
+                </v-fade-transition>
 
                 <div class="my-4 text-subtitle-1">
                     $ • {{ food.price }}
@@ -33,11 +33,8 @@
             <v-divider class="mx-4"></v-divider>
 
 
-
-
-
             <v-card-actions>
-                <v-btn color="deep-purple lighten-2" text>
+                <v-btn color="deep-purple lighten-2" text @click="addToCart">
                     Reserve
                 </v-btn>
             </v-card-actions>
@@ -46,7 +43,9 @@
 </template>
 
 <script>
-
+import { app, dbase } from '@/firebase/firebase'
+import { getAuth } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 export default {
     name: 'FoodCart',
     data() {
@@ -58,6 +57,26 @@ export default {
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`)
+        },
+        async addToCart() {
+            let userid = getAuth(app).currentUser.uid
+            console.log(userid)
+            if (userid) {
+                try {
+                    await setDoc(doc(dbase, 'carts', userid), {
+                        name: this.food.name,
+                        price: this.food.price,
+                        quantity: 1
+                    })
+                } catch (error) {
+                    alert(error)
+                }
+            } else {
+                this.$router.replace({ name: 'SignIn' })
+            }
+            // var cartref=doc(dbase,'carts',userid)
+            // console.log(cartref)
+
         }
     }
 

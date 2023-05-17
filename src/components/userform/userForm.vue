@@ -71,6 +71,10 @@ export default {
               name: this.name,
               // lastname: this.lastName
             })
+            await setDoc(doc(dbase, 'carts', userCredential.user.uid), {
+              name: this.name,
+              // lastname: this.lastName
+            })
           }
           catch (error) {
             console.log(error)
