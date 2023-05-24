@@ -1,151 +1,107 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+  <v-card height="350px" class="sidebar d-flex justify-center" color="primary">  
+    <v-navigation-drawer  permanent left>
+      <template v-slot:prepend>
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ name }} {{ lastname }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
+      <v-divider></v-divider>
 
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-list dense>
+        <v-list-item v-for="item in items" :key="item.title">
+          <v-btn width="100%" @click="compo=item.component">
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-btn>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <component :is="compo" :currentUser="user" :smt="{name:this.name,lastname:this.lastname}" class="monitor"></component>
+  
+  </v-card>
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
+import userCart from './userCart';
+import userInfo from './userInfo.vue';
+import { app, dbase } from '@/firebase/firebase'
+import { doc, getDoc } from 'firebase/firestore';
 
-    data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
-      ],
-    }),
+import { getAuth, signOut } from "firebase/auth";
+
+export default {
+  name: 'userProfile',
+  components: { userCart,userInfo },
+  data: () => ({
+    compo: userCart,
+    name:'',
+    lastname:'',
+    items: [
+      { title: 'carts', icon: 'mdi-cart',component:userCart },
+      { title: 'info', icon: 'mdi-card-account-details-outline', component:userInfo},
+      { title: 'lasrorders', icon: 'mdi-list-box-outline' ,component:''},
+      { title: 'logout', icon: 'mdi-logout' },
+    ],
+    //user: null
+  }), computed: {
+   user() {
+        let currentuser= getAuth(app).currentUser.uid
+      return currentuser
+        // let user = getDoc(doc(dbase, 'users', userid))
+        // return user.data()
+    }
+  }, methods: {
+    async userinfo(userid) {
+      try {
+
+        let user = await getDoc(doc(dbase, 'users', userid))
+        this.name = user.data().name
+        this.lastname = user.data().lastname
+      
+      } catch (error) {
+        console.log(error)
+      }
+
+
+    },
+    logout() {
+      const auth = getAuth(app);
+      signOut(auth).then(() => {
+      }).catch((error) => {
+        console.log(error)
+      });
+
+    }
   }
+  , mounted() {
+     let currentuser= getAuth(app).currentUser
+    this.user=currentuser.uid
+    this.userinfo(this.user)
+    // if (!this.user) {
+    //   this.$router.replace({ name: 'SignUp' })
+    // } else {
+    //   //console.log(this.user)
+    //   this.userinfo(this.user)
+    // }
+   
+
+  }
+
+}
 </script>
+<style lang="scss">
+.monitor{
+  width: 100%;
+}
+</style>

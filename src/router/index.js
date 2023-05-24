@@ -4,7 +4,7 @@ import HomeView from '../components/HomePage'
 import AdminPanel from '../components/admin/adminpanel'
 import FoodList from '../components/material/FoodList'
 import userForm from '../components/userform/userForm'
-//import SignIn from '../components/userform/SignIn'
+import userProfile from '../components/userform/userProfile'
 
 Vue.use(VueRouter)
 
@@ -35,6 +35,12 @@ const routes = [
     path: '/SignIn',
     name: 'SignIn',
     component: userForm
+  },
+  
+  {
+    path: '/userProfile',
+    name: 'userProfile',
+    component: userProfile
   },
  
 ]

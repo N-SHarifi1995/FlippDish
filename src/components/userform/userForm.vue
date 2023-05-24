@@ -17,7 +17,7 @@
         <v-btn v-if="this.type === 'SignUp'" class="mr-4" @click="signup" title="sign">
           register
         </v-btn>
-        <v-btn v-if="this.type === 'SignIn'">
+        <v-btn v-if="this.type === 'SignIn'" @click="signin">
           logIn
         </v-btn>
         <p v-if="this.type === 'SignUp'">I have an acount <v-btn text :to="{ name: 'SignIn' }">logIn</v-btn></p>
@@ -69,11 +69,11 @@ export default {
           try {
             await setDoc(doc(dbase, 'users', userCredential.user.uid), {
               name: this.name,
-              // lastname: this.lastName
+               lastname: this.lastname
             })
             await setDoc(doc(dbase, 'carts', userCredential.user.uid), {
               name: this.name,
-              // lastname: this.lastName
+             
             })
           }
           catch (error) {
@@ -104,6 +104,7 @@ export default {
 
     },
     async signin() {
+      alert('hi')
       console.log(this.email, this.password)
       const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.email, this.password)

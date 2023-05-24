@@ -45,7 +45,7 @@
 <script>
 import { app, dbase } from '@/firebase/firebase'
 import { getAuth } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {  collection,doc ,addDoc} from "firebase/firestore";
 export default {
     name: 'FoodCart',
     data() {
@@ -59,24 +59,26 @@ export default {
             return require(`@/assets/img/${addres}`)
         },
         async addToCart() {
-            let userid = getAuth(app).currentUser.uid
-            console.log(userid)
-            if (userid) {
+            let user = getAuth(app).currentUser
+            console.log(user)
+            if (user) {
                 try {
-                    await setDoc(doc(dbase, 'carts', userid), {
+                 
+                    const userRef = doc(collection(dbase, "users"), user.uid);
+                     await addDoc(collection(userRef, "cart") , {
                         name: this.food.name,
                         price: this.food.price,
                         quantity: 1
-                    })
+                    });
+
+               
                 } catch (error) {
                     alert(error)
                 }
             } else {
                 this.$router.replace({ name: 'SignIn' })
             }
-            // var cartref=doc(dbase,'carts',userid)
-            // console.log(cartref)
-
+            
         }
     }
 
