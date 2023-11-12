@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <NavBar></NavBar>
+   
     <router-view @refresh="console.log('hhhh')"></router-view>
     <FooterPage></FooterPage>
   </v-app>

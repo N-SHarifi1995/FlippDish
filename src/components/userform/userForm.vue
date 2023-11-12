@@ -1,7 +1,7 @@
 <template>
   <div class="myform">
     <h1 v-if="this.type === 'SignUp'">sigup</h1>
-    <h1 v-else>sigIn</h1>
+    <h1 v-else>sigInm</h1>
     <v-row no-gutters>
       <v-col cols="6" class="offset-3">
 

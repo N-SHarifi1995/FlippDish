@@ -1,21 +1,18 @@
 <template>
   <div class="myform">
-    <h1>sigin</h1>
+    <h1>siginfg</h1>
+  
     <v-row no-gutters>
       <v-col cols="6" class="offset-3">
 
-        <!-- <div class="names">
-          <v-text-field clearable outlined v-model="name" label="firstName"></v-text-field>
-          <v-text-field clearable v-model="lastname" label="lastName">
-          </v-text-field>
-        </div> -->
+       
         <v-text-field clearable dark color='#ffffff' class="input" v-model="email" label="email" required>
         </v-text-field>
         <v-text-field clearable dark class="input" v-model="password" label="password" required>
         </v-text-field>
 
         <v-btn class="mr-4"  title="sign">
-          register
+          registmer
         </v-btn>
         <v-btn @click="signin">
           logIn
