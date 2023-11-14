@@ -1,7 +1,7 @@
 <template>
   <div class="myform">
-    <h1 v-if="this.type === 'SignUp'">sigup</h1>
-    <h1 v-else>sigInm</h1>
+    <h1 class="headerform" v-if="this.type === 'SignUp'">SingUp</h1>
+    <h1 class="headerform" v-else>SingIn</h1>
     <v-row no-gutters>
       <v-col cols="6" class="offset-3">
 
@@ -14,14 +14,19 @@
         <v-text-field clearable dark v-model="password" label="password" required>
         </v-text-field>
 
-        <v-btn v-if="this.type === 'SignUp'" class="mr-4" @click="signup" title="sign">
+        <v-btn outlined v-if="this.type === 'SignUp'" class="mr-4 pubbutton" @click="signup" title="sign">
           register
         </v-btn>
-        <v-btn v-if="this.type === 'SignIn'" @click="signin">
+        <v-btn outlined v-if="this.type === 'SignIn'" @click="signin" class="mr-4 pubbutton
+        ">
           logIn
         </v-btn>
-        <p v-if="this.type === 'SignUp'">I have an acount <v-btn text :to="{ name: 'SignIn' }">logIn</v-btn></p>
-        <p v-else>I dont have an acount <v-btn text :to="{ name: 'SignUp' }">sign in</v-btn></p>
+        <p class="statment pt-5" v-if="this.type === 'SignUp'">I have an acount
+          <v-btn plain :to="{ name: 'SignIn' }" class="pubbutton">SignIn</v-btn>
+        </p>
+        <p class="statment pt-5" v-else>I dont have an acount
+          <v-btn plain :to="{ name: 'SignUp' }" class="pubbutton">signUp</v-btn>
+        </p>
 
       </v-col>
     </v-row>
@@ -46,7 +51,7 @@ export default {
       email: '',
       password: '',
 
-     // currentUser: null
+      // currentUser: null
     }
   },
   computed: {
@@ -69,11 +74,11 @@ export default {
           try {
             await setDoc(doc(dbase, 'users', userCredential.user.uid), {
               name: this.name,
-               lastname: this.lastname
+              lastname: this.lastname
             })
             await setDoc(doc(dbase, 'carts', userCredential.user.uid), {
               name: this.name,
-             
+
             })
           }
           catch (error) {
@@ -110,10 +115,11 @@ export default {
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then((userCredential) => {
           // Signed 'in'
+          console.log(userCredential)
           const user = userCredential.user;
           alert(user)
-          //
-          // ...
+        
+          this.$router.push('/userProfile/'+user)
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -134,8 +140,10 @@ export default {
 <style scoped lang="scss">
 .myform {
   margin-top: 8rem;
+}
 
-
+.statment {
+  color: $newyellow
 }
 </style>
   

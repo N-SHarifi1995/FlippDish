@@ -1,6 +1,6 @@
 <template>
-  <v-card height="350px" class="sidebar d-flex justify-center" color="primary">  
-    <v-navigation-drawer  permanent left>
+  <v-card  class="sidebar d-flex justify-center" color="#16151500" >  
+    <v-navigation-drawer  permanent left dark>
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
@@ -34,6 +34,7 @@
 
 <script>
 import userCart from './userCart';
+import OrderView from './order.vue';
 import userInfo from './userInfo.vue';
 import { app, dbase } from '@/firebase/firebase'
 import { doc, getDoc } from 'firebase/firestore';
@@ -42,7 +43,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: 'userProfile',
-  components: { userCart,userInfo },
+  components: { userCart,userInfo,OrderView },
   data: () => ({
     compo: userCart,
     name:'',
@@ -51,6 +52,7 @@ export default {
       { title: 'carts', icon: 'mdi-cart',component:userCart },
       { title: 'info', icon: 'mdi-card-account-details-outline', component:userInfo},
       { title: 'lasrorders', icon: 'mdi-list-box-outline' ,component:''},
+      { title: 'foods', icon: 'mdi-food' ,component:OrderView},
       { title: 'logout', icon: 'mdi-logout' },
     ],
     //user: null
@@ -78,6 +80,7 @@ export default {
     logout() {
       const auth = getAuth(app);
       signOut(auth).then(() => {
+        this.$router.push('/')
       }).catch((error) => {
         console.log(error)
       });
@@ -103,5 +106,9 @@ export default {
 <style lang="scss">
 .monitor{
   width: 100%;
+};
+.sidebar{
+  height: 100vh;
+
 }
 </style>
