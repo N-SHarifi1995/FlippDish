@@ -2,7 +2,7 @@
   <v-card class="containner">
     <v-tabs  dark color="secondary" class="tabs">
       <v-tab color="success" class="b">foods</v-tab>
-      <v-tab class="b">nenus</v-tab>
+      <v-tab class="b">menus</v-tab>
       <v-tab class="b">users</v-tab>
       <v-tab-item v-for="n in 3" :key="n" class='smt' >
         <v-container class="view">
