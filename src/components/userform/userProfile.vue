@@ -16,7 +16,7 @@
 
       <v-list dense>
         <v-list-item v-for="item in items" :key="item.title">
-          <v-btn width="100%" @click="compo=item.component">
+          <v-btn width="100%" @click="[compo=item.component,!compo ? logout(): console.log('d') ]">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -91,13 +91,7 @@ export default {
      let currentuser= getAuth(app).currentUser
     this.user=currentuser.uid
     this.userinfo(this.user)
-    // if (!this.user) {
-    //   this.$router.replace({ name: 'SignUp' })
-    // } else {
-    //   //console.log(this.user)
-    //   this.userinfo(this.user)
-    // }
-   
+
 
   }
 
