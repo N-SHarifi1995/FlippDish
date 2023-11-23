@@ -1,9 +1,9 @@
 
 <template>
-  <v-simple-table dark class="monitorpart">
-    <template v-slot:default>
-      <thead color="#ffc800">
-        <tr color="#ffc800">
+  <v-simple-table dark class="monitorpart " >
+    <template v-slot:default >
+      <thead color="#ffc800"  >
+        <tr color="#ffc800" class="tablehead">
           <th v-for="head in heads" :key="head" class="tablehead" color="#ffc800">
             {{ head }}
           </th>
@@ -25,6 +25,7 @@
           <td>{{ sum }}</td>
         </tr>
       </tbody>
+      <v-row><v-btn class="pubbutton" @click="pulse()">order</v-btn></v-row>
     </template>
   </v-simple-table>
 </template>
@@ -98,6 +99,17 @@ export default {
       }
       catch (err) { console.log(err) }
     },
+    pulse()
+
+{
+  this.$emit('changecompo')
+}
+
+
+
+
+
+    
 
   }
   , mounted() {
@@ -110,13 +122,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .monitorpart {
-  @include displayflex;
-  align-items: flex-start;
-  .tablehead{
-    color: $newyellow;
-  font-family: $font-dancing;
-  font-size: 3vh;
-  }
 
-}
+.tablehead{
+ color: $newyellow;
+  font-family: $font-dancing;
+  font-size:3vh;
+  }}
 </style>

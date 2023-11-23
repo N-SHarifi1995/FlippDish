@@ -27,7 +27,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <component :is="compo" :currentUser="user" :smt="{name:this.name,lastname:this.lastname}" class="monitor"></component>
+    <component :is="compo" @changecompo="changecombo()" :currentUser="user" :smt="{name:this.name,lastname:this.lastname}" class="monitor"></component>
   
   </v-card>
 </template>
@@ -85,6 +85,9 @@ export default {
         console.log(error)
       });
 
+    },
+    changecombo(){
+      this.compo=userInfo
     }
   }
   , mounted() {
@@ -97,9 +100,10 @@ export default {
 
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .monitor{
   width: 100%;
+  background-color: transparent
 };
 .sidebar{
   height: 100vh;

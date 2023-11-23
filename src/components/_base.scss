@@ -39,3 +39,12 @@ background-color: #0a0a0a00;}
   justify-content: center;
 
 }
+.monitorpart {
+  @include displayflex;
+  color:white;
+.tablehead{
+ color: $newyellow;
+  font-family: $font-dancing;
+  font-size:3vh;
+  }
+}
