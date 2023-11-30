@@ -1,13 +1,16 @@
 <template>
-  <v-card  class="sidebar d-flex justify-center" color="#16151500" >  
-    <v-navigation-drawer  permanent left dark>
-      <template v-slot:prepend>
-        <v-list-item two-line>
+
+  <v-card class="sidebar d-flex justify-center align-center
+  " color="#16151500">
+   
+  <v-navigation-drawer  left dark class="monitor ">
+      <template v-slot:prepend >
+        <v-list-item two-line  class="mt-16">
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/women/81.jpg">
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>{{ name }} {{ lastname }}</v-list-item-title>
+            <v-list-item-title>{{person.name }} {{ person.lastname }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -16,7 +19,7 @@
 
       <v-list dense>
         <v-list-item v-for="item in items" :key="item.title">
-          <v-btn width="100%" @click="[compo=item.component,!compo ? logout(): console.log('d') ]">
+          <v-btn width="100%" @click="[compo = item.component, !compo ? logout() : console.log('d')]">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -26,10 +29,15 @@
           </v-btn>
         </v-list-item>
       </v-list>
+      
     </v-navigation-drawer>
-    <component :is="compo" @changecompo="changecombo()" :currentUser="user" :smt="{name:this.name,lastname:this.lastname}" class="monitor"></component>
-  
+
+    <component :is="compo" @changecompo="changecombo()" :currentUser="user" :smt="person"
+      class="monitor"></component>
+
+   
   </v-card>
+  
 </template>
 
 <script>
@@ -43,34 +51,44 @@ import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: 'userProfile',
-  components: { userCart,userInfo,OrderView },
+  components: { userCart, userInfo, OrderView },
   data: () => ({
     compo: userCart,
-    name:'',
-    lastname:'',
+
+    person: {
+      name: '',
+      lastname: '',
+      addres:'',
+      phone:''
+      
+    },
     items: [
-      { title: 'carts', icon: 'mdi-cart',component:userCart },
-      { title: 'info', icon: 'mdi-card-account-details-outline', component:userInfo},
-      { title: 'lasrorders', icon: 'mdi-list-box-outline' ,component:''},
-      { title: 'foods', icon: 'mdi-food' ,component:OrderView},
+      { title: 'carts', icon: 'mdi-cart', component: userCart },
+      { title: 'info', icon: 'mdi-card-account-details-outline', component: userInfo },
+      { title: 'lasrorders', icon: 'mdi-list-box-outline', component: '' },
+      { title: 'foods', icon: 'mdi-food', component: OrderView },
       { title: 'logout', icon: 'mdi-logout' },
     ],
     //user: null
   }), computed: {
-   user() {
-        let currentuser= getAuth(app).currentUser.uid
+    user() {
+      let currentuser = getAuth(app).currentUser.uid
       return currentuser
-        // let user = getDoc(doc(dbase, 'users', userid))
-        // return user.data()
+      // let user = getDoc(doc(dbase, 'users', userid))
+      // return user.data()
     }
   }, methods: {
     async userinfo(userid) {
       try {
 
-        let user = await getDoc(doc(dbase, 'users', userid))
-        this.name = user.data().name
-        this.lastname = user.data().lastname
-      
+        let user = (await getDoc(doc(dbase, 'users', userid))).data()
+
+        this.person.name = user.name
+        this.person.lastname = user.lastname
+        this.person.addres = user.adress
+        this.person.phone = user.phone
+
+
       } catch (error) {
         console.log(error)
       }
@@ -86,13 +104,13 @@ export default {
       });
 
     },
-    changecombo(){
-      this.compo=userInfo
+    changecombo() {
+      this.compo = userInfo
     }
   }
   , mounted() {
-     let currentuser= getAuth(app).currentUser
-    this.user=currentuser.uid
+    let currentuser = getAuth(app).currentUser
+    this.user = currentuser.uid
     this.userinfo(this.user)
 
 
@@ -101,12 +119,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.monitor{
+.monitor {
   width: 100%;
-  background-color: transparent
-};
-.sidebar{
-  height: 100vh;
-
+  background-color: red
 }
-</style>
+
+;
+
+.sidebar {
+  height: 100vh;
+.navdrawer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+}</style>

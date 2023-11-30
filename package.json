@@ -8,10 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.5.0",
     "@vue/cli": "^5.0.8",
     "axios": "^1.6.2",
     "core-js": "^3.8.3",
     "firebase": "^9.20.0",
+    "stripe": "^14.5.0",
     "sweetalert2": "^11.7.3",
     "swiper-vue2": "^1.0.10",
     "vue": "^2.6.14",
