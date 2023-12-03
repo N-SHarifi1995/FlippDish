@@ -102,7 +102,7 @@ export default {
     pulse()
 
 {
-  this.$emit('changecompo')
+  this.$emit('changecompo',this.sum)
 }
 
 

@@ -32,7 +32,7 @@
       
     </v-navigation-drawer>
 
-    <component :is="compo" @changecompo="changecombo()" :currentUser="user" :smt="person"
+    <component :is="compo" @changecompo="changecombo($event)" :currentUser="user" :smt="person"
       class="monitor"></component>
 
    
@@ -59,7 +59,8 @@ export default {
       name: '',
       lastname: '',
       addres:'',
-      phone:''
+      phone:'',
+      price:''
       
     },
     items: [
@@ -104,8 +105,9 @@ export default {
       });
 
     },
-    changecombo() {
+    changecombo(e) {
       this.compo = userInfo
+      this.person.price=e
     }
   }
   , mounted() {

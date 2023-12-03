@@ -31,18 +31,14 @@
         </tbody>
       </template>
     </v-simple-table>
-  <stripe-checkout ref="checkoutRef"  :pk="publishableKey" :session-id="sessionId"
-     />
+    <stripe-checkout ref="checkoutRef" :pk="publishableKey" :session-id="sessionId" />
     <button class="button button4" @click=" submit()">Buy now</button>
   </div>
 </template>
 
 <script>
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
-//import { stripe } from '@vue-stripe/vue-stripe';
-//import axios from 'axios';
 import stripe from 'stripe'
-
 
 
 export default {
@@ -52,8 +48,7 @@ export default {
     {
       publishableKey: 'pk_test_51OGd4wJeXTDdhtDVdP86ayQBis0iNrWQxTXSmcr2TqsW1qFJKsXfOMTLZjh5HTWikYeNxPZ1mJTlC2GLhcIUTZoW005OOQwHTJ'
       , Sstripe: null,
-      stripe:null,
-      sessionId:null,
+      sessionId: null,
       adreessActive: true,
       mobileActive: true,
       loading: false,
@@ -68,7 +63,7 @@ export default {
 
     }),
   components: { StripeCheckout, },
-  props: ['currentUser', 'smt'],
+  props: [ 'smt'],
   methods: {
     active(source) {
       if (source === 'adress') {
@@ -79,51 +74,52 @@ export default {
     },
 
 
- load(){
-  //this.stripe=stripe('pk_test_51OGd4wJeXTDdhtDVdP86ayQBis0iNrWQxTXSmcr2TqsW1qFJKsXfOMTLZjh5HTWikYeNxPZ1mJTlC2GLhcIUTZoW005OOQwHTJ')
-this.Sstripe=stripe('sk_test_51OGd4wJeXTDdhtDVQKLjo7jLoZRRuq1S92Ffkvah0nkeEAl8F61Y1jUb23h4ecBZphnltjJ09yy9TZPlDx05KE3L00ncq8U5rt')
- },
+    load() {
+      console.log(this.smt.price)
+      this.Sstripe = stripe('sk_test_51OGd4wJeXTDdhtDVQKLjo7jLoZRRuq1S92Ffkvah0nkeEAl8F61Y1jUb23h4ecBZphnltjJ09yy9TZPlDx05KE3L00ncq8U5rt')
+    },
 
- async submit() {
-  console.log(this.Sstripe)
-  try {
- let session=   await this.Sstripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        mode: "payment",
-        success_url: 'http://localhost:8080/',
-        cancel_url: 'http://localhost:8080/',
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: 'item.name',
-                description: 'item.shortDes',
-                images: ['item.image']
+    async submit() {
+      console.log(this.Sstripe)
+
+      try {
+        let session = await this.Sstripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          mode: "payment",
+          success_url: 'http://localhost:8080/',
+          cancel_url: 'http://localhost:8080/',
+          line_items: [
+            {
+              price_data: {
+                currency: "usd",
+                product_data: {
+                  name: 'item.name',
+                  description: 'item.shortDes',
+                  images: ['item.image']
+                },
+                unit_amount: this.smt.price
               },
-              unit_amount: 200 * 100
-            },
-            quantity: 2
-          }],
-     
-      })
-      
-      console.log(session)
-      this.sessionId=session.id
-     this.$refs.checkoutRef.redirectToCheckout()
-  } catch (error) {
-    console.log(error)
-  }
-  
-    
+              quantity: 1
+            }],
+
+        })
+
+        console.log(session)
+        this.sessionId = session.id
+        this.$refs.checkoutRef.redirectToCheckout()
+      } catch (error) {
+        console.log(error)
+      }
+
+
     }
-    
+
   },
 
 
-mounted() {
-this.load()
-}
+  mounted() {
+    this.load()
+  }
 }
 </script>
 <style lang="scss" scoped>
