@@ -1,16 +1,15 @@
 <template>
-
   <v-card class="sidebar d-flex justify-center align-center
   " color="#16151500">
-   
-  <v-navigation-drawer  left dark class="monitor ">
-      <template v-slot:prepend >
-        <v-list-item two-line  class="mt-16">
+
+    <v-navigation-drawer left dark class="monitor ">
+      <template v-slot:prepend>
+        <v-list-item two-line class="mt-16">
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/women/81.jpg">
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>{{person.name }} {{ person.lastname }}</v-list-item-title>
+            <v-list-item-title>{{ person.name }} {{ person.lastname }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -29,40 +28,39 @@
           </v-btn>
         </v-list-item>
       </v-list>
-      
+
     </v-navigation-drawer>
 
-    <component :is="compo" @changecompo="changecombo($event)" :currentUser="user" :smt="person"
-      class="monitor"></component>
+    <component :is="compo" @changecompo="changecombo($event)" :currentUser="user" :smt="person" class="monitor">
+    </component>
 
-   
+
   </v-card>
-  
 </template>
 
 <script>
 import userCart from './userCart';
 import OrderView from './order.vue';
 import userInfo from './userInfo.vue';
-import { app, dbase } from '@/firebase/firebase'
-import { doc, getDoc } from 'firebase/firestore';
+// import {  dbase } from '@/firebase/firebase'
+// import { doc, getDoc } from 'firebase/firestore';
 
-import { getAuth, signOut } from "firebase/auth";
-
+//import { getAuth } from "firebase/auth";
+//import store from '../../store/index'
 export default {
   name: 'userProfile',
   components: { userCart, userInfo, OrderView },
   data: () => ({
     compo: userCart,
+    user: '',
+    // person: {
+    //   // name: '',
+    //   // lastname: '',
+    //   // addres: '',
+    //   // phone: '',
+    //   // price: ''
 
-    person: {
-      name: '',
-      lastname: '',
-      addres:'',
-      phone:'',
-      price:''
-      
-    },
+    // },
     items: [
       { title: 'carts', icon: 'mdi-cart', component: userCart },
       { title: 'info', icon: 'mdi-card-account-details-outline', component: userInfo },
@@ -72,50 +70,44 @@ export default {
     ],
     //user: null
   }), computed: {
-    user() {
-      let currentuser = getAuth(app).currentUser.uid
-      return currentuser
-      // let user = getDoc(doc(dbase, 'users', userid))
-      // return user.data()
-    }
+person(){return this.$store.state.userInfo}
   }, methods: {
-    async userinfo(userid) {
-      try {
+    // async userinfo(userid) {
+    //   try {
 
-        let user = (await getDoc(doc(dbase, 'users', userid))).data()
+    //     let user = (await getDoc(doc(dbase, 'users', userid))).data()
 
-        this.person.name = user.name
-        this.person.lastname = user.lastname
-        this.person.addres = user.adress
-        this.person.phone = user.phone
-
-
-      } catch (error) {
-        console.log(error)
-      }
+    //     this.person.name = user.name
+    //     this.person.lastname = user.lastname
+    //     this.person.addres = user.adress
+    //     this.person.phone = user.phone
 
 
-    },
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+
+
+    // },
     logout() {
-      const auth = getAuth(app);
-      signOut(auth).then(() => {
-        this.$router.push('/')
-      }).catch((error) => {
-        console.log(error)
-      });
 
+      this.$store.dispatch('logout')
     },
     changecombo(e) {
       this.compo = userInfo
-      this.person.price=e
+
+      this.person.price = e
     }
   }
   , mounted() {
-    let currentuser = getAuth(app).currentUser
-    this.user = currentuser.uid
-    this.userinfo(this.user)
+    // let currentuser = getAuth(app).currentUser
+    // this.user = currentuser.uid
+    //this.$store.dispatch('getCurrentUser')
 
-
+    this.user = this.$store.state.curentUser
+   // this.userinfo(this.user)
+    
+    console.log(this.person)
   }
 
 }
@@ -130,10 +122,12 @@ export default {
 
 .sidebar {
   height: 100vh;
-.navdrawer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
+
+  .navdrawer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
 }
-}</style>
+</style>

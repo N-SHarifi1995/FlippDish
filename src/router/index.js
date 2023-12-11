@@ -5,7 +5,7 @@ import AdminPanel from '../components/admin/adminpanel'
 import FoodList from '../components/material/FoodList'
 import userForm from '../components/userform/userForm'
 import userProfile from '../components/userform/userProfile'
-
+import sucessPage from '../components/userform/sucessPage'
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +41,11 @@ const routes = [
     path: '/userProfile/:fullname',
     name: 'userProfile',
     component: userProfile,
+  },
+ {
+    path: '/sucessPage',
+    name: 'sucessPage',
+    component: sucessPage,
   },
  
 ]

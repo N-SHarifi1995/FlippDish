@@ -63,7 +63,7 @@ export default {
 
     }),
   components: { StripeCheckout, },
-  props: [ 'smt'],
+  props: [ 'smt','currentUser'],
   methods: {
     active(source) {
       if (source === 'adress') {
@@ -86,8 +86,8 @@ export default {
         let session = await this.Sstripe.checkout.sessions.create({
           payment_method_types: ["card"],
           mode: "payment",
-          success_url: 'http://localhost:8080/',
-          cancel_url: 'http://localhost:8080/',
+          success_url: 'http://localhost:8080/#/sucessPage',
+          cancel_url: 'http://localhost:8080/#/SignIn',
           line_items: [
             {
               price_data: {
@@ -104,14 +104,17 @@ export default {
 
         })
 
-        console.log(session)
+        alert(session.id)
         this.sessionId = session.id
-        this.$refs.checkoutRef.redirectToCheckout()
+        //let ss= this.sessionId 
+        console.log('dddddddddddd'+this.$store.state.cart)
+        localStorage.setItem('cart',JSON.stringify(this.$store.state.cart))
+        localStorage.setItem('userInfo',JSON.stringify(this.$store.state.userInfo))
+       this.$refs.checkoutRef.redirectToCheckout({ })
       } catch (error) {
         console.log(error)
       }
-
-
+     
     }
 
   },

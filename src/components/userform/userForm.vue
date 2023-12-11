@@ -80,6 +80,10 @@ export default {
               name: this.name,
 
             })
+            await setDoc(doc(dbase, 'OldOrders', userCredential.user.uid), {
+              name: this.name,
+
+            })
           }
           catch (error) {
             console.log(error)
@@ -117,9 +121,10 @@ export default {
           // Signed 'in'
           console.log(userCredential)
           const user = userCredential.user;
-          alert(user)
-        
-          this.$router.push('/userProfile/'+user)
+          alert(user.uid)
+          this.$store.dispatch('getCurrentUser')
+          this.$store.dispatch('raedCart',this.$store.state.curentUser)
+          this.$router.push('/userProfile/'+user.uid)
         })
         .catch((error) => {
           const errorCode = error.code;
