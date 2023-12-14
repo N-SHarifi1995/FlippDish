@@ -2,7 +2,8 @@
   <v-card class="sidebar d-flex justify-center align-center
   " color="#16151500">
 
-    <v-navigation-drawer left dark class="monitor ">
+    <v-navigation-drawer 
+      permanent left dark class="monitor ">
       <template v-slot:prepend>
         <v-list-item two-line class="mt-16">
           <v-list-item-avatar>
@@ -42,6 +43,7 @@
 import userCart from './userCart';
 import OrderView from './order.vue';
 import userInfo from './userInfo.vue';
+import OldOrders from './oldOrders.vue';
 // import {  dbase } from '@/firebase/firebase'
 // import { doc, getDoc } from 'firebase/firestore';
 
@@ -49,7 +51,7 @@ import userInfo from './userInfo.vue';
 //import store from '../../store/index'
 export default {
   name: 'userProfile',
-  components: { userCart, userInfo, OrderView },
+  components: { userCart, userInfo, OrderView ,OldOrders},
   data: () => ({
     compo: userCart,
     user: '',
@@ -63,10 +65,11 @@ export default {
     // },
     items: [
       { title: 'carts', icon: 'mdi-cart', component: userCart },
+      { title: 'pervious Orders', icon: 'mdi-logout' ,component:OldOrders},
       { title: 'info', icon: 'mdi-card-account-details-outline', component: userInfo },
-      { title: 'lasrorders', icon: 'mdi-list-box-outline', component: '' },
       { title: 'foods', icon: 'mdi-food', component: OrderView },
       { title: 'logout', icon: 'mdi-logout' },
+      
     ],
     //user: null
   }), computed: {

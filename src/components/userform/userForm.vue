@@ -123,7 +123,7 @@ export default {
           const user = userCredential.user;
           alert(user.uid)
           this.$store.dispatch('getCurrentUser')
-          this.$store.dispatch('raedCart',this.$store.state.curentUser)
+          this.$store.dispatch('raedCart',{id:this.$store.state.curentUser,flg:1})
           this.$router.push('/userProfile/'+user.uid)
         })
         .catch((error) => {

@@ -12,7 +12,7 @@
 <script>
 //import Store from '@/store/index';
 import { dbase } from '@/firebase/firebase'
-import { collection, doc, addDoc } from "firebase/firestore";
+import { collection, doc, addDoc,deleteDoc } from "firebase/firestore";
 export default {
   name: 'sucessPage',
   components: {},
@@ -33,7 +33,7 @@ export default {
       try {
         const userRef = doc(collection(dbase, "users"), user);
         console.log(
-          this.info
+          userRef
           )
         await addDoc(collection(userRef, "OldOrders"), {
           cardItems: this.items,
@@ -42,6 +42,9 @@ export default {
         date:new Date().toLocaleString()
         
         });
+       
+        deleteDoc(doc(userRef, 'cart'));
+      
 
 
       } catch (error) {

@@ -41,6 +41,10 @@ export default new Vuex.Store({
     setquantit(state, quantit) {
       state.quantit = quantit
     },
+    AddQuantit(state, {index,value}) {
+      state.quantit[index]= value
+      console.log(value,state.quantit)
+    },
   },
   actions: {
     fetchData({ commit }) {
@@ -100,9 +104,9 @@ export default new Vuex.Store({
       commit('setPersonInfo', personInfo)
 return personInfo
     },
-  async  raedCart({ commit }, id) {
+  async  raedCart({ commit },{ id,flg}) {
     
-      console.log(id)
+      console.log(id,flg)
       const userRef = doc(collection(dbase, "users"), id);
       console.log(userRef)
       try {
@@ -119,7 +123,9 @@ return personInfo
         // items.quantit = quantit
          
           commit('setcard', items)
-         commit('setquantit', quantit) 
+          if(flg)
+          { commit('setquantit', quantit) }
+        
          console.log(quantit)
         })
       }
@@ -131,6 +137,13 @@ return personInfo
 
 
     },
+    addQuantit({ commit }, index){
+//
+let value=this.state.quantit[index]+1
+console.log(value)
+commit('AddQuantit',{index,value})
+
+    }
   }
   ,
   modules: {

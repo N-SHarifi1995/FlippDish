@@ -17,5 +17,6 @@ new Vue({
   axios,
   VueAxios,
   stripe,
+ 
   render: h => h(App)
 }).$mount('#app')

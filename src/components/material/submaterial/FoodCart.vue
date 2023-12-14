@@ -45,7 +45,7 @@
 <script>
 import { app, dbase } from '@/firebase/firebase'
 import { getAuth } from "firebase/auth";
-import {  collection,doc ,addDoc} from "firebase/firestore";
+import { collection, doc, addDoc } from "firebase/firestore";
 export default {
     name: 'FoodCart',
     data() {
@@ -53,33 +53,63 @@ export default {
 
 
         }
-    }, props: ['food'],
+    },
+    computed: {
+        cart() {
+            return this.$store.state.cart
+        }
+    },
+    props: ['food'],
     methods: {
         getsrc(addres) {
             return require(`@/assets/img/${addres}`)
+        },
+        checkCart(myfood) {
+            let check
+            this.cart.forEach(i => {
+                if (i.name === myfood.name) {
+                    
+                    check = this.cart.indexOf(i)
+                    console.log(check,i.name )
+                }
+               
+
+            });
+            console.log(check)
+            return check
         },
         async addToCart() {
             let user = getAuth(app).currentUser
             console.log(user)
             if (user) {
-                try {
-                 
-                    const userRef = doc(collection(dbase, "users"), user.uid);
-                     await addDoc(collection(userRef, "cart") , {
-                        name: this.food.name,
-                        price: this.food.price,
-                        quantity: 1
-                    });
+                // 
+                if (this.checkCart(this.food)!=null) {
+                    console.log(this.checkCart(this.food))
+                   this.$store.dispatch('addQuantit',this.checkCart(this.food))
+                    
+                } else {
+                    try {
 
-               
-                } catch (error) {
-                    alert(error)
+                        const userRef = doc(collection(dbase, "users"), user.uid);
+                        await addDoc(collection(userRef, "cart"), {
+                            name: this.food.name,
+                            price: this.food.price,
+                            quantity: 1
+                        });
+
+
+                    } catch (error) {
+                        alert(error)
+                    }
                 }
+
+
             } else {
                 this.$router.replace({ name: 'SignIn' })
             }
-            
-        }
+
+        },
+
     }
 
 }

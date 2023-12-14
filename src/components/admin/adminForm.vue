@@ -5,10 +5,12 @@
       <v-col cols="4">
         <form class="fform" color='#ffffff'>
           <v-text-field class="input" dark color='#ffffff' v-model="recivedData.name"  label="Name"
+        
             required></v-text-field>
           <v-combobox dark v-if="type === 'food'" v-model="select" 
             color='#ffffff' :items="items" label="Menus"></v-combobox>
           <v-text-field class="input" dark color='#ffffff' v-model="recivedData.src"  label="image"
+          
             required></v-text-field>
           <v-text-field dark v-model="recivedData.price" v-if="type === 'food'" color='#ffffff' label="price"
             required></v-text-field>
@@ -18,6 +20,7 @@
               add
             </v-btn>
             <v-btn class="mr-4" @click="edite(recivedData.id)">
+           
               edite
             </v-btn>
             <v-btn @click="clear">
@@ -38,11 +41,13 @@ import { collection, updateDoc, doc, addDoc } from "firebase/firestore";
 import {dbase} from '@/firebase/firebase'
 
 import Swal from 'sweetalert2'
+
 export default {
   name: "adminForm",
   data() {
     return {
      select:null,
+    
       items: [
          'brakfast' ,
          'drinks', 
@@ -68,6 +73,8 @@ export default {
     async submit() {
       let mycolection = null
       let myObject = null
+     
+      
       if (this.type === 'food') {
         mycolection = collection(dbase, "Food")
         myObject = {
