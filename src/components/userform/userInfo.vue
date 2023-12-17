@@ -106,11 +106,11 @@ export default {
 
         alert(session.id)
         this.sessionId = session.id
-        //let ss= this.sessionId 
+        let ss= this.sessionId 
         console.log('dddddddddddd'+this.$store.state.cart)
         localStorage.setItem('cart',JSON.stringify(this.$store.state.cart))
         localStorage.setItem('userInfo',JSON.stringify(this.$store.state.userInfo))
-       this.$refs.checkoutRef.redirectToCheckout({ })
+       this.$refs.checkoutRef.redirectToCheckout({ss})
       } catch (error) {
         console.log(error)
       }

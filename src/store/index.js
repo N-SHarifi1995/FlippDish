@@ -15,7 +15,7 @@ export default new Vuex.Store({
     cart: [],
     Oldorder: [],
     userInfo: {},
-    quantit:[]
+    quantit: []
   },
   getters: {
   },
@@ -41,9 +41,9 @@ export default new Vuex.Store({
     setquantit(state, quantit) {
       state.quantit = quantit
     },
-    AddQuantit(state, {index,value}) {
-      state.quantit[index]= value
-      console.log(value,state.quantit)
+    AddQuantit(state, { index, value }) {
+      state.quantit[index] = value
+      console.log(value, state.quantit)
     },
   },
   actions: {
@@ -90,7 +90,7 @@ export default new Vuex.Store({
       });
 
     },
-    async getCurrentUser({ commit }) {
+    async getCurrentUser({ commit }, flag) {
 
       let currentuser = getAuth(app).currentUser
       console.log(currentuser)
@@ -102,17 +102,35 @@ export default new Vuex.Store({
       personInfo.addres = user.adress
       personInfo.phone = user.phone
       commit('setPersonInfo', personInfo)
-return personInfo
+      if (flag === 1) {
+        getAuth(app).currentUser.getIdTokenResult().then(function ({ claims }) {
+          if (claims.user_id == 'uFNnlFA7YIZy4j3tA8PwAYEcDVP2') {
+            router.push('/admin')
+
+          } else {
+            console.log(personInfo)
+            //  console.log(state.userInfo)
+            router.push('/userProfile/' + personInfo.name)
+
+          }
+
+        })
+      }
+
+
+      return personInfo
     },
-  async  raedCart({ commit },{ id,flg}) {
-    
-      console.log(id,flg)
+    async raedCart({ commit }, { id, flg }) {
+
+      console.log(id, flg)
       const userRef = doc(collection(dbase, "users"), id);
       console.log(userRef)
+      let quantit = []
       try {
-     await   onSnapshot(collection(userRef, "cart"), (q) => {
+        await onSnapshot(collection(userRef, "cart"), (q) => {
+          console.log('adddddddddddd')
           let items = []
-          let quantit = []
+
           q.forEach((doc) => {
             let item = doc.data()
             quantit.push(item.quantity)
@@ -120,30 +138,45 @@ return personInfo
             items.push(item)
           }
           )
-        // items.quantit = quantit
-         
+          // items.quantit = quantit
+
           commit('setcard', items)
-          if(flg)
-          { commit('setquantit', quantit) }
-        
-         console.log(quantit)
+
+
+          console.log(quantit)
         })
       }
       catch (error) {
         alert(error)
       }
-
-
-
+      if (flg) { commit('setquantit', quantit) }
 
     },
-    addQuantit({ commit }, index){
-//
-let value=this.state.quantit[index]+1
-console.log(value)
-commit('AddQuantit',{index,value})
+
+    addQuantit({ commit }, index) {
+      //
+      let value = +this.state.quantit[index] + 1
+      console.log(value)
+      commit('AddQuantit', { index, value })
 
     }
+    ,
+    
+    // admindetection({ state }, person) {
+
+    //   getAuth(app).currentUser.getIdTokenResult().then(function ({ claims }) {
+    //     if (claims.user_id == 'uFNnlFA7YIZy4j3tA8PwAYEcDVP2') {
+    //       router.push('/admin')
+
+    //     } else {
+    //       console.log(person.name)
+    //       console.log(state.userInfo)
+    //       router.push('/userProfile/' + person.name)
+
+    //     }
+
+    //   })
+    // }
   }
   ,
   modules: {

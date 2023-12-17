@@ -113,18 +113,20 @@ export default {
 
     },
     async signin() {
-      alert('hi')
+     
       console.log(this.email, this.password)
       const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.email, this.password)
-        .then((userCredential) => {
+        .then(async(userCredential) => {
           // Signed 'in'
-          console.log(userCredential)
+          
           const user = userCredential.user;
           alert(user.uid)
-          this.$store.dispatch('getCurrentUser')
+this.$store.dispatch('getCurrentUser',1)
+   // this.$store.dispatch('admindetection',info)
           this.$store.dispatch('raedCart',{id:this.$store.state.curentUser,flg:1})
-          this.$router.push('/userProfile/'+user.uid)
+          //this.$router.push('/userProfile/'+user.uid)
+          
         })
         .catch((error) => {
           const errorCode = error.code;
