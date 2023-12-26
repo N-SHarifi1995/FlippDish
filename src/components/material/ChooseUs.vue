@@ -1,74 +1,98 @@
 <template>
-    <v-card class="choose">
-        <v-row no-gutters class="title">why choose use?</v-row>
+    <v-card class="choose section d-none d-sm-block">
         <v-row no-gutters>
-            <v-col  v-for="data in values" :key="data.value">
-                <v-progress-circular class='circle' progress-circular-underlay-stroke="rgba(map-get(red, 'base'), 0.4)"
-                    :rotate="360" :size="100" :width="15" :value="value">
-                    {{ value}}
-                </v-progress-circular>
+            <v-col class="titleQ">
+                <p>why choose use?</p>
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
+            <v-col class="container"  >
+              
+                <!-- <v-progress-circular class='circle' :rotate="360" :size="100" :width="5" :value="valueOne">
+                    {{valueOne}}
+                </v-progress-circular> -->
+                <p class='circle' >
+                    {{valueOne}}
+                </p>
                 <p class="text">satisfacation with service</p>
             </v-col>
-          
-
+            <v-col class="container">
+                <p class='circle' >
+                    {{valueOne}}
+                </p>
+                <p class="text">satisfacation with service</p>
+            </v-col>
+            <v-col class="container">
+                <p class='circle' >
+                    {{valueOne}}
+                </p>
+                <p class="text">satisfacation with service</p>
+            </v-col>
         </v-row>
     </v-card>
-
 </template>
 
 <script>
 export default {
     name: 'ChooseUs',
-
     data() {
         return {
             interval: {},
-            value: 0,
-            values:[ { name: "sevice", value: "100"},
-                { name: "orders", value: "120"},
-                { name: "seafood", value: "500"},
-               ]
+            value:[0,0,0],
+           valueOne:0 ,
+           valueTow:0 ,
+            val: [120,140,50]
         }
     },
+    computed :{
+       
+    },
+
     beforeDestroy() {
         clearInterval(this.interval)
     },
     mounted() {
         this.interval = setInterval(() => {
-            if (this.value === 100) {
-                return (this.value = 0)
+            if (this.valueOne ===1000) {
+                return (this.valueOne = 0)
             }
-            this.value += 10
-        }, 1000)
+           else{this.valueOne += 100} 
+           if (this.valueTow ===2000) {
+                return (this.valueTow = 0)
+            }
+           else{this.valueTow += 100} 
+        }, 200)
     },
 }
 </script>
 <style lang="scss" scoped>
 .choose {
-   
-    background-color: #111d19;
+    justify-content: space-around;
+    flex-direction: column;
     color: rgb(255, 255, 255);
-    font-family: $font-dancing;
-    padding: 3rem 0;
-
-    .title {
-        @include displayflex;
-        font-size: calc(1.8rem + 0.5vw);
-        color: white;
-        padding: 4rem 0;
-
-    }
-
+margin-top: 2rem;
+   
+.container{
+    @include displayflex;
+    flex-direction: column;
+   
     .circle {
+        @include displayflex;
         padding: 2rem 0;
-        color: rgb(255, 255, 255);
-        ;
-        background-image: url(@/assets/img/mm.jpg);
+        color: rgb(254, 252, 252);
+        font-weight: 800;
+     background-image: url(@/assets/img/bg.jpg) ;
+     background-repeat: repeat;
         background-attachment: fixed;
-        background-size: cover;
+       //background-size: cover;
         background-position: center;
-        border-radius: 50%;
-    }
+        border-radius:50%;
+       height:8vw;
+       width: 8vw;
+      
+       
+    }}
+    
 
     .text {
         padding: 2rem 0;

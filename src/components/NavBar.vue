@@ -1,13 +1,13 @@
 <template>
-    <v-card flat tile class="navbar" color="rgba(0, 0, 0,0)">
+    <v-card  class="navbar" color="rgba(0,0,0,0)">
         <v-toolbar class="toolbar" color="rgba(0,0,0,0)">
-            <v-btn fab icon class=" d-none d-sm-flex ">
+            <v-btn fab icon class="  ">
 
                 <v-icon color="#ffc800" @click='home'>mdi-home</v-icon>
             </v-btn>
             <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn fab icon class="d-none d-sm-flex" v-bind="attrs" v-on="on">
+                    <v-btn fab icon class="" v-bind="attrs" v-on="on">
                         <v-icon color="#ffc800">mdi-account-circle-outline</v-icon>
                     </v-btn>
 
@@ -73,7 +73,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .navbar {
-    position: absolute;
+   
     top: 0;
     width: 100%;
     right: 0;

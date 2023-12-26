@@ -2,7 +2,7 @@
   <v-app id="app">
     <NavBar></NavBar>
    
-    <router-view @refresh="console.log('hhhh')"></router-view>
+    <router-view @refresh="console.log('hhhh')" class="main"></router-view>
     <FooterPage></FooterPage>
   </v-app>
 </template>
@@ -46,11 +46,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 #app {
+   @include displayflex;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: #111d19;
+  background-color:$bgcolor;
+ .main{
+  
+  background-color:$bgcolor;
+
+ }
 
 }
 </style>

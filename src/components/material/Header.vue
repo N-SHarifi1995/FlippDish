@@ -2,12 +2,12 @@
   <v-card class="header">
    
      <v-row no-gutters>
-      <v-col class="col-4 banner-text">
-        <h3>FlipDish</h3>
-        <p>taste of life</p>
+      <v-col class=" banner-text"  md="4" sm="6" >
+        <h3  >FlipDish</h3>
+        <p class="pt-5">taste of life</p>
       </v-col>
-      <v-col class="col-8 img-container">
-        <v-img class='img' :src="require('@/assets/img/pexels-ilia-izhakovskii-3026182\ \(1\).jpg')"></v-img>
+      <v-col class="img-container"  md="8" sm="6">
+        <v-img class='img' :src="require('@/assets/img/Meat on Black.jpg')"></v-img>
       </v-col>
     </v-row>
 
@@ -27,10 +27,10 @@ export default {
 </script >
 <style lang="scss" scoped>
 .header {
-  
+ background:$bgcolor;
   //max-height: 70vh;
   .img-container {
-    //background: red;
+    //
     padding: 0;
     //  margin: 0;
     box-sizing: border-box;
@@ -49,14 +49,13 @@ export default {
 
   .banner-text {
     @include displayflex;
-    background-color: #111d19;
-
-    //background: rgb(106, 255, 0);
-    font-size: 5vw;
+    // background-color: #111d19;
+    background-color: #000806;
+    font-size: 8vw;
     font-weight: 900;
     color: white;
     flex-direction: column;
-    font-family: $font-dancing;
+   font-family: $font-dancing;
     padding: 3rem 0;
 
     p {
