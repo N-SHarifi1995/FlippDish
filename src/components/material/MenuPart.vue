@@ -56,7 +56,7 @@ export default {
     padding-bottom: 3rem;
 
     .head {
-        font-size: 5vw;
+        font-size: 4vw;
     }
 }
 
@@ -73,13 +73,13 @@ export default {
     // background-repeat: repeat;
     // background-position: center;
 
-    height: 15vw;
-    width: 75%;
+    height: 13vw;
+    width: 70%;
     position: relative;
 
     background-color: rgba(35, 35, 35, 0.1);
 
-    border: 1px solid rgba(235, 235, 235, 0.1);
+   // border: 1px solid rgba(235, 235, 235, 0.1);
     border-radius: 15px;
     color: white;
     // display: flex;
@@ -112,7 +112,7 @@ export default {
     &:hover {
         transform: translateY(-5vh);
         background: rgb(58, 59, 59);
-        background: radial-gradient(circle, rgba(58, 59, 59, 1) 0%, rgba(0, 0, 0, 1) 53%);
+        background: radial-gradient(circle, rgb(105, 110, 80) 0%, rgba(0, 0, 0, 1) 53%);
         transition: all 0.8s ease-in-out;
         color: white;
 

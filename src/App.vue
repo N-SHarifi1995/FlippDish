@@ -16,23 +16,16 @@ export default {
   data() {
     return {
       menus: [],
-
     }
   }
   ,
 
   methods: {
-    async getdata() {
-      await this.$store.dispatch('fetchData')
-
-
-    },
+   
   },
-
-
-
+  
   beforeMount() {
-    this.getdata()
+    this.$store.dispatch('fetchData')
     const auth = getAuth(app)
     const curentUser = auth.currentUser
     console.log(curentUser)

@@ -1,26 +1,18 @@
 <template>
-    <v-card class="tip">
-
-        <!-- <v-row class="title">Meus</v-row> -->
-
-       
-            <v-carousel cycle class="trans" hide-delimiter-background height="300" :show-arrows="false">
-                <v-carousel-item transition="slide-x-transition" v-for="(slide, i) in slides" :key="i">
-
-                    <v-row  no-gutters class="roww">
-                        <v-col   class="col-md-6  col-sm-8  text">
+    <v-card class="tip section">
+        <v-carousel cycle class="trans"  hide-delimiters direction="vertical" invertal="8000" :height="30 + 'vh'" :show-arrows="false">
+            <v-carousel-item transition="slide-x-transition" v-for="(slide, i) in slides" :key="i">
+                <v-row no-gutters class="roww">
+                    <v-col class=" imgcontainer">
+                        <v-img class='img' :src="getsrc(slide.src)"></v-img>
+                        <div class="col-md-6  col-sm-8  text">
                             <h3 class="text-h3-sm text-h2-xs text-h3-sm">{{ slide.header }}</h3>
                             <p>{{ slide.explain }}</p>
-                        </v-col>
-                        <v-col   class="col-md-6  col-sm-4  imgcontainer">
-                            <v-img class='img' :src="getsrc(slide.src)"></v-img>
-                        </v-col>
-                    </v-row>
-
-                </v-carousel-item>
-            </v-carousel>
-
-      
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-carousel-item>
+        </v-carousel>
     </v-card>
 </template>
 
@@ -32,11 +24,11 @@ export default {
         return {
 
             slides: [
-                { header: 'First', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'mm.jpg' },
-                { header: 'second', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'nn.jpg' },
-                { header: 'third', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'ss.jpg' },
-                { header: 'forth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'jj.jpg' },
-                { header: 'fifth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'kk.jpg' },
+                { header: 'First', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: '4.jpg' },
+                { header: 'second', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'jj.jpg' },
+                { header: 'third', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'ting-tian-E6DsqnZbZ4o-unsplash.jpg' },
+                { header: 'forth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'pexels-edward-eyer-1049626 (1).jpg' },
+                { header: 'fifth', explain: 'This site can’t be reachedCheck if there is a typo in loremipsum.io.If spelling is correct, try running Windows Network Diagnostics.DNS_PROBE_FINISHED_NXDOMAIN', src: 'pexels-ilia-izhakovskii-3026182 (1).jpg' },
 
             ],
         }
@@ -51,34 +43,40 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tip {
-    padding: 1rem;
-    background-color: transparent;
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-   
+
+    //overflow: hidden;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: uppercase;
+
 
     .trans {
         transition: all .9s ease-in-out;
-    
-    }
+        ;
 
-    .roww {
-        height: 100%
-    }
-
-    .imgcontainer {
-        // margin-bottom: 5rem;
-        //background-color: red;
-        height: 100%;
-
-        .img {
-            border-radius: 50%;
+        .roww {
             height: 100%;
-            width: 100%;
-            border: 8px rgba(17, 16, 16, 0.39) groove;
+          //  background-color: rgb(72, 0, 255);
 
+            .imgcontainer {
+                @include displayflex;
+                height: 100%;
+                width: 100%;
 
+                .img {
+                    //  position:absolute;
+                    width: 100%;
+                    height: 100%;
+                    filter: brightness(40%);
+                    
+
+                }
+            }
         }
     }
+
+
+
+
 
     .text {
         // display: flex;
@@ -86,20 +84,23 @@ export default {
         padding: 0 3rem;
         color: white;
         text-align: start;
-        //background-color: blue;
+left:7px;
+        position: absolute;
         height: 100%;
 
         h3 {
-           font-size:calc(1.5rem + 0.5vw);;
+            font-size: calc(1.5rem + 0.5vw);
+            ;
             padding: 2rem 0;
         }
 
         p {
-            font-size:calc(0.8rem + 0.5vw);
+            font-size: calc(0.8rem + 0.5vw);
 
         }
 
-    };
+    }
 
-}
-</style>
+    ;
+
+}</style>
