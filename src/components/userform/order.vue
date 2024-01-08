@@ -1,13 +1,9 @@
 
-
   
 <template>
   <v-card color="#16151500">
     <v-toolbar color="#16151500" flat>
-
-
       <v-spacer></v-spacer>
-
       <template v-slot:extension>
         <v-tabs v-model="tab" centered dark background-color="transparent" color="#ffc800" grow>
           <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -18,11 +14,10 @@
         </v-tabs>
       </template>
     </v-toolbar>
-
     <v-tabs-items v-model="tab" class="roww">
       <v-tab-item v-for="menue in menus" :key="menue.id">
-        <v-row>
-          <v-col cols='3' v-for="food in foods(menue)" :key="food.id">
+        <v-row class="items">
+          <v-col  v-for="food in foods(menue)" :key="food.id">
             <FoodCart :food="food">
             </FoodCart>
           </v-col>
@@ -80,6 +75,15 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.items{
+  display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+}
 .roww {
   background-color: rgba(26, 27, 27, 0);
 }

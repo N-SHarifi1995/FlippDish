@@ -11,11 +11,11 @@
           </tr>
           <tr>
             <td class="tablehead">lastname :</td>
-            <td>{{ smt.lastname }}</td>
+            <td class="input " >{{ smt.lastname }}</td>
           </tr>
           <tr>
             <td class="tablehead ">adress :</td>
-            <td>
+            <td class="input " >
               <v-textarea class="input " dark color='#ffffff' required :disabled="adreessActive"
                 :value="smt.addres"></v-textarea>
 
@@ -126,6 +126,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.monitorpart{
+  font-size: 5vh;
+}
 .tablehead {
   font-size: 5vh;
 }

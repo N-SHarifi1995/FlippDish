@@ -1,16 +1,28 @@
 <template>
-  <v-card class="containner">
-    <v-tabs  dark color="secondary" class="tabs">
-      <v-tab color="success" class="b">foods</v-tab>
-      <v-tab class="b">menus</v-tab>
-      <v-tab class="b">users</v-tab>
-      <v-tab-item v-for="n in 3" :key="n" class='smt' >
-        <v-container class="view">
-          <component :is="component[n - 1]" />
+  <v-card class="adminpanel">
+    <v-tabs v-model="tab" dark centered background-color="#000806" color="#ffc800">
+        <v-tabs-slider></v-tabs-slider>
+        <v-tab href="#tab-1" class="b">
+          foods
+        </v-tab>
+        <v-tab href="#tab-2" class="b">
+          Menues
+        </v-tab>
+        <v-tab href="#tab-3" class="b">
+          Users
+        </v-tab>
+      </v-tabs>
+    
+      <v-tabs-items v-model="tab" class="tabs">
+        <v-tab-item v-for="i in 3" :key="i" :value="'tab-' + i" class='smt'>
+          <v-card flat class="content">
+            <keep-alive>
+              <component :is="component[i - 1]" />
+            </keep-alive>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
 
-        </v-container>
-      </v-tab-item>
-    </v-tabs>
 
   </v-card>
 </template>
@@ -23,32 +35,30 @@ export default {
   data() {
     return {
       tab: 0,
+      text: 'ddddddddddddddddddddddddddddddddd',
       component: [FoodPanel, MenuPanel]
     }
 
-  }, 
+  },
 
 
 
 }
 </script>
 <style lang="scss" scoped>
-.containner {
-
-  margin-top: 4rem;
-
-}
-
-.tabs {
+.adminpanel {
   @include displayflex;
-  background-color:#111d19;
   flex-direction: column;
-  color: aliceblue;
-.smt{ background-color: #111d19;}
-  
-  .b {
-    background-color: #111d19;
-    color: white;
-    
+  min-height: 100vh;
+  .tabs {
+    background-color: $bgcolor;
+   
   }
+  .content {
+    background-color:  $bgcolor;
+    min-height: 100vh;
+   max-width: 80vw;
+  
+  }
+
 }</style>

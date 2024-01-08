@@ -1,29 +1,17 @@
 <template>
   <div class="table">
 
-    <v-simple-table dark>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <!-- <th class="text-left" v-for="head in Object.keys(menus[3])" :key="head.id">
-          {{ head }}
-                </th> -->
-            <th class="text-left" v-for="head in heads" :key="head">
-              {{ head }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in menus" :key="item.id">
-            <td>{{ item.name }}</td>
-            <td>{{ item.src }}</td>
-            <td><v-btn @click="delet(item.id)"><v-icon class="">mdi-delete</v-icon></v-btn></td>
-            <td><v-btn @click="change(item)"><v-icon class="">mdi-pencil</v-icon></v-btn></td>
-          </tr>
-        </tbody>
+    <v-data-table :headers="heads" :items="menus" :items-per-page="5" class="elevation-1" dark>
+      <template v-slot:item="{ item }">
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.menuId }}</td>
+          <td><v-icon small  @click="delet(item.id)">mdi-delete</v-icon></td>
+          <td><v-icon samll  @click="change(item)">mdi-pencil</v-icon></td>
+        </tr>
       </template>
-    </v-simple-table>
-    <v-btn class="btn" @click="show">{{ btnText }}</v-btn>
+    </v-data-table>
+    <v-btn plain outlined class="btn pubbutton" @click="show">{{ btnText }}</v-btn>
     <adminForm :type="'menu'" :newObj="newObj" v-if="switchform"></adminForm>
   </div>
 </template>
@@ -33,7 +21,7 @@
 
 import adminForm from './adminForm.vue';
 import { deleteDoc, doc } from "firebase/firestore";
-import {dbase }from '@/firebase/firebase'
+import { dbase } from '@/firebase/firebase'
 export default {
   name: "MenusPanel",
   data() {
@@ -45,7 +33,8 @@ export default {
         src: ''
       },
       switchform: false,
-      heads: ['name',"src"]
+      heads: [{ text: 'name', value: 'name' },
+      { text: '', value: 'action' }, { text: '', value: 'action' }],
     };
   },
   components: { adminForm },
@@ -86,4 +75,9 @@ export default {
 
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn {
+  margin: 4rem 0;
+  color: $newyellow;
+}
+</style>

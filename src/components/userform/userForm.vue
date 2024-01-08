@@ -113,20 +113,20 @@ export default {
 
     },
     async signin() {
-     
+
       console.log(this.email, this.password)
       const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.email, this.password)
-        .then(async(userCredential) => {
+        .then(async (userCredential) => {
           // Signed 'in'
-          
+
           const user = userCredential.user;
           alert(user.uid)
-this.$store.dispatch('getCurrentUser',1)
-   // this.$store.dispatch('admindetection',info)
-          this.$store.dispatch('raedCart',{id:this.$store.state.curentUser,flg:1})
+          this.$store.dispatch('getCurrentUser', 1)
+          // this.$store.dispatch('admindetection',info)
+          this.$store.dispatch('raedCart', { id: this.$store.state.curentUser, flg: 1 })
           //this.$router.push('/userProfile/'+user.uid)
-          
+
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -147,10 +147,55 @@ this.$store.dispatch('getCurrentUser',1)
 <style scoped lang="scss">
 .myform {
   margin-top: 8rem;
+
+  .headerform {
+  color: #feed00;
+ text-shadow: 1px 0px 1px #f6f3b9, 2px 0px 1px #f6f3b9, 3px 0px 1px #f6f3b9, 2px 0px 3px #e9e75a, 2px 3px 15px #e9e75a, 2px 0px 15px, 5px 0px 125px, 20px 0vw 200px #e9e75a,40px 0vw 200px #e9e75a;;
+ animation: flicker 3s linear infinite;
+ //animation-name: lamp;\
+//    animation-duration: 0.9s;
+//    animation-iteration-count: infinite;
+ 
+//  animation-timing-function: ease;
+
+  }
 }
+
+
+@keyframes flicker {
+	0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+		//text-shadow: none;
+    opacity: .99;
+		
+	}
+	20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+		opacity: 0.4;
+	}
+}
+@keyframes lamp {
+  0%{
+    color: rgb(137, 134, 134);
+    text-shadow: 4px 4px 30px rgb(0, 0, 0);
+  }
+
+  20% {
+    text-shadow: 4px 4px 50px rgb(255, 255, 0);
+    color: $newyellow
+  }
+  40% {
+    text-shadow: 4px 4px 50px rgb(0, 0, 0);
+    color: rgb(137, 134, 134);
+  }
+ 
+  100% {
+    text-shadow: 4px 4px 50px rgb(255, 255, 0);;
+    color:$newyellow;
+  }
+}
+
+;
 
 .statment {
   color: $newyellow
-}
-</style>
+}</style>
   

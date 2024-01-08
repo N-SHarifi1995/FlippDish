@@ -2,7 +2,7 @@
 <template>
  <v-card
     max-width="400"
-    class="mx-auto"
+    class="mx-auto monitorpart"
   >
     <v-container>
       <v-row dense>
@@ -132,10 +132,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .monitorpart {
+max-height: 100vh;
+overflow-y: scroll;
 
-  .tablehead {
-    color: $newyellow;
-    font-family: $font-dancing;
-    font-size: 3vh;
-  }
 }</style>

@@ -4,26 +4,36 @@ $newyellow: #ffc800;
 $bgcolor: #000806;
 //$progress-circular-underlay-stroke:	rgba(map-get($grey, 'base'), 0.4) !default;
 $progress-circular-overlay-transitio: all 0.5s ease-in-out !default;
+//$data-table-regular-header-font-size	:map-deep-get( '$font-dancing', '26') !default;
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-};
+}
+
+;
+
 .headerform {
   color: $newyellow;
   font-family: $font-dancing;
   font-size: 9vh;
-};
+}
+
+;
+
 .pubbutton {
   color: $newyellow;
   background-color: #0a0a0a00;
 }
-.titleQ{
+
+.titleQ {
   font-family: $font-dancing;
   font-size: calc(1rem + 0.5vw);
   color: white;
   padding: 2rem 0;
 }
+
 @font-face {
   font-family: 'dancing';
   src: url(D:\vue\fllipdish\src\assets\static\DancingScript-Regular.ttf),
@@ -32,21 +42,25 @@ $progress-circular-overlay-transitio: all 0.5s ease-in-out !default;
     url(D:\vue\fllipdish\src\assets\static\DancingScript-SemiBold.ttf);
 }
 
+
+
 @mixin displayflex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .monitorpart {
   @include displayflex;
   color: white;
-
+ background-color: $bgcolor;
   .tablehead {
     color: $newyellow;
     font-family: $font-dancing;
     font-size: 3vh;
   }
 }
+
 .section {
   font-family: $font-dancing;
   background-color: $bgcolor;

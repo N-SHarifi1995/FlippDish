@@ -1,9 +1,13 @@
 <template>
-  <v-card class="sidebar d-flex justify-center align-center
+   <div> 
+    <v-btn fab  icon class=" monitorpart" @click="drawer=!drawer">
+                <v-icon color="#ffc800" >mdi-menu</v-icon>
+            </v-btn>
+     <v-card class="sidebar d-flex justify-center align-center
   " color="#16151500">
 
     <v-navigation-drawer 
-      permanent left dark class="monitor ">
+     left dark  absolute class="drawer " v-model="drawer">
       <template v-slot:prepend>
         <v-list-item two-line class="mt-16">
           <v-list-item-avatar>
@@ -36,7 +40,8 @@
     </component>
 
 
-  </v-card>
+  </v-card></div>
+
 </template>
 
 <script>
@@ -55,14 +60,8 @@ export default {
   data: () => ({
     compo: userCart,
     user: '',
-    // person: {
-    //   // name: '',
-    //   // lastname: '',
-    //   // addres: '',
-    //   // phone: '',
-    //   // price: ''
-
-    // },
+    drawer:true,
+  
     items: [
       { title: 'carts', icon: 'mdi-cart', component: userCart },
       { title: 'pervious Orders', icon: 'mdi-logout' ,component:OldOrders},
@@ -73,7 +72,8 @@ export default {
     ],
     //user: null
   }), computed: {
-person(){return this.$store.state.userInfo}
+person(){return this.$store.state.userInfo},
+
   }, methods: {
     // async userinfo(userid) {
     //   try {
@@ -118,19 +118,14 @@ person(){return this.$store.state.userInfo}
 <style lang="scss" scoped>
 .monitor {
   width: 100%;
-  background-color: red
+  max-height: 100vh;
+  background-color: $bgcolor;
+}.drawer{
+  width: 100%;
+  max-height: 100vh;
+  background-color:  $bgcolor;
 }
-
-;
-
 .sidebar {
   height: 100vh;
-
-  .navdrawer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  }
 }
 </style>

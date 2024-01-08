@@ -1,39 +1,46 @@
 
 <template>
   <div class="table">
-
-    <v-simple-table dark>
-      <template v-slot:default>
-        <thead>
-          <tr>
-          <!-- <th class="text-left" v-for="head in Object.keys(foods[3])" :key="head.id">
-              {{ head }}
-                    </th> -->
-            <th class="text-left" v-for="head in heads" :key="head">
-              {{ head }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in foods" :key="item.id">
+    <v-data-table
+    :headers="headers"
+    :items="foods"
+    :items-per-page="5"
+    class="elevation-1"
+    dark
+  > <template v-slot:item="{item}" >
+    <tr >
             <td>{{ item.name }}</td>
             <td>{{ item.menuId }}</td>
             <td>{{ item.price }}</td>
              <td>{{ item.src }}</td>
             <td>{{ item.explain }}</td>
-           
-            <td><v-btn @click="delet(item.id)"><v-icon class="">mdi-delete</v-icon></v-btn></td>
-            <td><v-btn @click="change(item)"><v-icon class="">mdi-pencil</v-icon></v-btn></td>
+            <td><v-icon small class="" @click="delet(item.id)">mdi-delete</v-icon></td>
+           <td> <v-icon samll class="" @click="change(item)">mdi-pencil</v-icon></td>
           </tr>
-        </tbody>
       </template>
-    </v-simple-table>
+     </v-data-table>
+    
+ <v-btn plain outlined class="btn pubbutton" @click="show" >{{ btnText }}</v-btn>
+    <adminForm :type="'food'" :newObj="newObj" v-if="switchform"></adminForm>
+  </div> </template>  
+  <!-- <template v-slot:item="{item}" >
+    <tr >
+            <td>{{ item.name }}</td>
+            <td>{{ item.menuId }}</td>
+            <td>{{ item.price }}</td>
+             <td>{{ item.src }}</td>
+            <td>{{ item.explain }}</td>
+            <td><v-icon small class="" @click="delet(item.id)">mdi-delete</v-icon></td>
+           <td> <v-icon samll class="" @click="change(item)">mdi-pencil</v-icon></td>
+          </tr>
+      </template> -->
+<!-- </v-data-table>
     <v-btn class="btn" @click="show" >{{ btnText }}</v-btn>
     <adminForm :type="'food'" :newObj="newObj" v-if="switchform"></adminForm>
-  </div>
-</template>
+  </div> -->
+<!-- </template> -->
 
-<script>
+ <script>
 import adminForm from './adminForm.vue';
 import { deleteDoc, doc } from "firebase/firestore";
 import {dbase} from '@/firebase/firebase'
@@ -50,8 +57,17 @@ export default {
         src: ''
       },
       switchform: false,
-      heads: ['name', "menuId", " price ", "src", "explain"]
-
+     // heads: ['name', "menuId", " price ", "src", "explain"],
+      headers: [
+        
+          { text: 'name', value: 'name' },
+          { text: 'menuId', value: 'menuId' },
+          { text: 'price', value: 'price' },
+          { text: 'src', value: 'src' },
+          { text: 'explain', value: 'explain' },
+          { text: '', value: 'action' },
+          { text: '', value: 'action' }
+        ],
     };
   },
   computed: {
@@ -99,10 +115,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .table {
-  background-color: transparent;
-
+ 
   .btn {
     margin: 4rem 0;
+    color: $newyellow;
   }
 }
-</style>
+</style> 
