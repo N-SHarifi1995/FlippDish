@@ -113,8 +113,8 @@ export default {
     border-bottom-right-radius: 30%;
 
     .img {
-        max-height: 12rem;
-        max-width: 12rem;
+        max-height: 8rem;
+        max-width: 8rem;
         height: 12vw;
         width: 12vw;
 

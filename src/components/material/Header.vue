@@ -51,7 +51,7 @@ export default {
     @include displayflex;
     // background-color: #111d19;
     background-color: #000806;
-    font-size: 8vw;
+    font-size: 6vw;
     font-weight: 900;
     color: white;
     flex-direction: column;

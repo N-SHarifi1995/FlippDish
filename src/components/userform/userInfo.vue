@@ -1,6 +1,7 @@
 
 <template>
-  <div> <v-simple-table width="80%" dark class="monitorpart">
+  <div>
+     <v-simple-table width="80%" dark class="monitorpart">
       <template v-slot:default>
         <thead>
         </thead>
@@ -32,7 +33,7 @@
       </template>
     </v-simple-table>
     <stripe-checkout ref="checkoutRef" :pk="publishableKey" :session-id="sessionId" />
-    <button class="button button4" @click=" submit()">Buy now</button>
+    <v-btn outlined class="pubbutton mt-8"  v-if="smt.price!==undefined" @click=" submit()">Buy Now</v-btn>
   </div>
 </template>
 

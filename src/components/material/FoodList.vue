@@ -1,8 +1,8 @@
 <template>
-    <v-card class="foodlist">
-        <h3 class="header">{{  mymenu }}</h3>
+    <v-card class="section">
+        <p class="header">{{  mymenu }}</p>
         <v-row>
-            <v-col cols='3' v-for="food in foods" :key="food.id">
+            <v-col  v-for="food in foods" :key="food.id">
                 <FoodCart :food="food">
                 </FoodCart>
             </v-col>
@@ -49,31 +49,14 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-.foodlist {
-    padding: 1rem;
-    background-color: transparent;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
-    .header {
-        margin: 5rem 3rem 0;
-        @include displayflex;
-    font-size: calc(1.8rem + 0.5vw);
-    color: white;
-    padding: 4rem 0;
+<style lang="scss" scoped> 
+.section {
+  height:100vh;
+  .header{
+font-size:4rem;
+color: white;
+  }
     }
 
-}
-
-.items {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
-    //  background-color: aqua;
-}
 </style>
     

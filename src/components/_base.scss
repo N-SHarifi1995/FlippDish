@@ -52,8 +52,10 @@ $progress-circular-overlay-transitio: all 0.5s ease-in-out !default;
 
 .monitorpart {
   @include displayflex;
+
   color: white;
- background-color: $bgcolor;
+  background-color: $bgcolor;
+
   .tablehead {
     color: $newyellow;
     font-family: $font-dancing;

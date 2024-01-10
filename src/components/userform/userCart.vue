@@ -30,7 +30,7 @@
 
       </tbody>
      
-      <v-row><v-btn class="pubbutton mt-6" @click="pulse()">order</v-btn></v-row>
+      <v-row><v-btn outlined class="pubbutton mt-6" @click="pulse()">order</v-btn></v-row>
     </template>
   </v-simple-table>
 </template>
@@ -123,8 +123,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.monitorpart {background-color: $bgcolor;
-  color: antiquewhite;
+.monitorpart {
+
 
  .textfeild{
   width: 5rem;
@@ -133,12 +133,12 @@ export default {
    .total{
     color: $newyellow;
     font-family: $font-dancing;
-    font-size: 2.5vh;
+    font-size: 1.3rem;
     font-weight: 400;
  }
   .tablehead {
   
     font-family: $font-dancing;
-    font-size: 2vh;
+    font-size: 1.5rem;
   }
 }</style>

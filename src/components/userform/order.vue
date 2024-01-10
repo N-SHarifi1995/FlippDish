@@ -1,15 +1,14 @@
 
-  
 <template>
-  <v-card color="#16151500">
+  <v-card class="monitorpart">
+  <v-card color="#16151500" >
     <v-toolbar color="#16151500" flat>
       <v-spacer></v-spacer>
       <template v-slot:extension>
-        <v-tabs v-model="tab" centered dark background-color="transparent" color="#ffc800" grow>
+        <v-tabs v-model="tab" centered dark background-color="transparent" color="#ffc800" >
           <v-tabs-slider color="yellow"></v-tabs-slider>
-
-          <v-tab v-for="menue in menus" :key="menue.id" color="error">
-            {{ menue.name }}
+          <v-tab v-for="menue in menus" :key="menue.id" color="error" class="tab">
+          <h3 class="text-overline text-sm-caption">{{ menue.name }}</h3>  
           </v-tab>
         </v-tabs>
       </template>
@@ -22,10 +21,9 @@
             </FoodCart>
           </v-col>
         </v-row>
-
       </v-tab-item>
     </v-tabs-items>
-  </v-card>
+  </v-card></v-card>
 </template>
 
 
@@ -83,9 +81,12 @@ export default {
         align-items: center;
         padding: 1rem 0;
         margin-bottom: 1rem;
+           font-family: $font-dancing;
 }
 .roww {
   background-color: rgba(26, 27, 27, 0);
+   font-family: $font-dancing;
 }
+
 </style>
   

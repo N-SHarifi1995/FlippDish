@@ -27,9 +27,9 @@
                         </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
-                        <v-list-item-title>
+                        <!-- <v-list-item-title>
                             <router-link class="link" :to="{ name: 'adminPanel' }"> Admin</router-link>
-                        </v-list-item-title>
+                        </v-list-item-title> -->
                     </v-list-item>
                 </v-list>
             </v-menu>
