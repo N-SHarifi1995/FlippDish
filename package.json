@@ -2,10 +2,15 @@
   "name": "fllipdish",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://N-SHarifi1995.github.io/FlippDish"
+
+,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@vue-stripe/vue-stripe": "^4.5.0",
@@ -33,6 +38,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^6.1.1",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
     "vue-cli-plugin-vuetify": "~2.5.8",
