@@ -3,7 +3,7 @@ module.exports = defineConfig({
   transpileDependencies: [
     'vuetify'
   ],
-  publicPath: '/fllipdish/'
+
   // devServer: {
   //   proxy: 'https://securetoken.googleapis.com/v1/token?key=AIzaSyDfU8ZviDNX3e8lyuWvxvArfay-C0SUHjM',
   //   },
